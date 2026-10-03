@@ -95,7 +95,7 @@
         tr:last-child td{border-bottom:none}tr:hover td{background:rgba(0,230,118,0.03)}
         .badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700}
         .badge-gold{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border)}.badge-silver{background:var(--silver-bg);color:var(--silver);border:1px solid var(--silver-border)}.badge-bronze{background:var(--bronze-bg);color:var(--bronze);border:1px solid var(--bronze-border)}
-        .form-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;max-width:520px}
+        .form-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;max-width:100%;}
         .form-card-title{font-size:18px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
         select.form-input{appearance:none;cursor:pointer}
         .collection-list{display:flex;flex-direction:column;gap:10px}
@@ -141,7 +141,6 @@
         .mobile-nav-item.active{color:var(--accent);background:rgba(0,230,118,0.08)}.mobile-nav-item i{font-size:18px}
         .pulse-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;animation:pulse 2s ease infinite}
         @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.5)}}
-
         .motivation-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:28px;overflow:hidden}
         .motivation-text{text-align:center;margin-bottom:20px}
         .motivation-text h3{font-size:22px;font-weight:900;color:var(--accent);margin-bottom:8px}
@@ -149,230 +148,79 @@
         .motivation-images{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
         .motivation-images img{width:100%;height:130px;object-fit:cover;border-radius:var(--radius-sm);border:1px solid var(--border);transition:transform 0.3s, box-shadow 0.3s}
         .motivation-images img:hover{transform:scale(1.05);box-shadow:0 4px 15px rgba(0,230,118,0.2)}
-
+        .admin-add-form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:16px}
         @media(max-width:1024px){.packages-grid{grid-template-columns: repeat(2, 1fr); gap: 15px;}.stats-grid{grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }}
-        @media(max-width:768px){.sidebar{display:none;}.content{padding:16px;padding-top:20px;}.stats-grid{grid-template-columns: 1fr; gap: 12px;}.topbar{padding:0 16px;}.topbar-brand-text{display:none;}.topbar-user-info{display:none;}.welcome-banner{flex-direction:column;text-align:center;gap:16px;}.mobile-nav{display:flex !important; height: 60px;}.content{padding-bottom: 80px;}.motivation-images{grid-template-columns:repeat(2,1fr);}.motivation-images img:nth-child(3){display:none;}}
-        @media(max-width:480px){.login-box{padding:32px 24px;}.packages-grid{grid-template-columns: 1fr; gap: 15px;}.table-container{overflow-x: auto;}table{font-size: 12px;}th,td{padding: 10px 8px;}.table-header{padding:12px 16px;}.page-title{font-size:20px;}.page-desc{display: none;}.motivation-images{grid-template-columns:1fr;}.motivation-images img:nth-child(3){display:block; height:160px;}}
+        @media(max-width:768px){.sidebar{display:none;}.content{padding:16px;padding-top:20px;}.stats-grid{grid-template-columns: 1fr; gap: 12px;}.topbar{padding:0 16px;}.topbar-brand-text{display:none;}.topbar-user-info{display:none;}.welcome-banner{flex-direction:column;text-align:center;gap:16px;}.mobile-nav{display:flex !important; height: 60px;}.content{padding-bottom: 80px;}.motivation-images{grid-template-columns:repeat(2,1fr);}.motivation-images img:nth-child(3){display:none;}.admin-add-form{grid-template-columns:1fr 1fr;}}
+        @media(max-width:480px){.login-box{padding:32px 24px;}.packages-grid{grid-template-columns: 1fr; gap: 15px;}.table-container{overflow-x: auto;}table{font-size: 12px;}th,td{padding: 10px 8px;}.table-header{padding:12px 16px;}.page-title{font-size:20px;}.page-desc{display: none;}.motivation-images{grid-template-columns:1fr;}.motivation-images img:nth-child(3){display:block; height:160px;}.admin-add-form{grid-template-columns:1fr;}}
         ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
     </style>
 </head>
 <body>
-
 <div class="bg-effects"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 <div class="toast-container" id="toastContainer"></div>
 <div class="modal-overlay" id="modalOverlay"><div class="modal" id="modalContent"></div></div>
 <div class="save-indicator" id="saveIndicator"><i class="fas fa-check-circle"></i> تم الحفظ بنجاح</div>
 
 <div class="app-container">
-
-    <!-- تسجيل الدخول -->
     <div class="login-screen" id="loginScreen">
         <div class="login-box">
-            <div class="login-logo">
-                <img src="https://z-cdn-media.chatglm.cn/files/57f6f9c3-d069-4883-85da-b02ecd157280.jpg?auth_key=1889503561-8068c24ba349406a8cedab55b86564c2-0-270bcff4b63d89d6c674006d6a126c26" alt="Ad_cycel Logo">
-            </div>
+            <div class="login-logo"><img src="https://z-cdn-media.chatglm.cn/files/57f6f9c3-d069-4883-85da-b02ecd157280.jpg?auth_key=1889503561-8068c24ba349406a8cedab55b86564c2-0-270bcff4b63d89d6c674006d6a126c26" alt="Logo"></div>
             <h1 class="login-title">Ad_cycel</h1>
             <p class="login-subtitle">نظام إدارة جمع القوارير البلاستيكية الذكي</p>
-            
             <div id="loginForm">
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <div class="input-icon-wrapper">
-                        <input type="email" class="form-input icon-input" id="loginEmail" placeholder="example@domain.com">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                </div>
-                <div class="form-group" id="loginCodeGroup">
-                    <label>كلمة السر</label>
-                    <div class="input-icon-wrapper">
-                        <input type="password" class="form-input icon-input" id="loginCode" placeholder="أدخل كلمة السر">
-                        <i class="fas fa-key"></i>
-                    </div>
-                </div>
-                
+                <div class="form-group"><label>البريد الإلكتروني</label><div class="input-icon-wrapper"><input type="email" class="form-input icon-input" id="loginEmail" placeholder="example@domain.com"><i class="fas fa-envelope"></i></div></div>
+                <div class="form-group" id="loginCodeGroup"><label>كلمة السر</label><div class="input-icon-wrapper"><input type="password" class="form-input icon-input" id="loginCode" placeholder="أدخل كلمة السر"><i class="fas fa-key"></i></div></div>
                 <p id="forgotPassLink" style="margin-top:-10px;margin-bottom:18px;font-size:12px;text-align:left;"><span style="color:var(--accent);cursor:pointer;" onclick="showForgotPassword()">هل نسيت كلمة السر؟</span></p>
-
                 <div id="registerFields" style="display:none;">
                     <div class="form-group"><label>اسم المطعم</label><input type="text" class="form-input" id="regRestName" placeholder="مثال: ATLANTA"></div>
                     <div class="form-group"><label>رقم الهاتف</label><input type="tel" class="form-input" id="regPhone" placeholder="0550 00 00 00"></div>
                     <div class="form-group"><label>عنوان المطعم</label><input type="text" class="form-input" id="regAddress" placeholder="الولاية - البلدية"></div>
-                    <div class="form-group">
-                        <label>كلمة السر</label>
-                        <div class="input-icon-wrapper">
-                            <input type="password" class="form-input icon-input" id="regCode" placeholder="اختر كلمة السر">
-                            <i class="fas fa-key"></i>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>تأكيد كلمة السر</label>
-                        <div class="input-icon-wrapper">
-                            <input type="password" class="form-input icon-input" id="regCodeConfirm" placeholder="أعد إدخال كلمة السر">
-                            <i class="fas fa-key"></i>
-                        </div>
-                    </div>
+                    <div class="form-group"><label>كلمة السر</label><div class="input-icon-wrapper"><input type="password" class="form-input icon-input" id="regCode" placeholder="اختر كلمة السر"><i class="fas fa-key"></i></div></div>
+                    <div class="form-group"><label>تأكيد كلمة السر</label><div class="input-icon-wrapper"><input type="password" class="form-input icon-input" id="regCodeConfirm" placeholder="أعد إدخال كلمة السر"><i class="fas fa-key"></i></div></div>
                 </div>
-                
                 <button class="btn btn-primary" onclick="handleLogin()"><i class="fas fa-arrow-left"></i><span id="loginBtnText">تسجيل الدخول</span></button>
                 <p style="margin-top:14px;font-size:13px;color:var(--muted);"><span id="toggleRegText" style="color:var(--accent);cursor:pointer;" onclick="toggleRegister()">ليس لديك حساب؟ سجل الآن</span></p>
             </div>
         </div>
     </div>
 
-    <!-- واجهة المدير -->
     <div id="adminDashboard" style="display:none;">
-        <header class="topbar">
-            <div class="topbar-brand">
-                <div class="topbar-brand-icon">
-                    <img src="https://z-cdn-media.chatglm.cn/files/e3a354f3-0bb9-4a01-8f7e-1064f913a748.jpg?auth_key=1889499426-bbb8954530794cfeaa8e5def2ca3579a-0-6a0d15fd6f13550023c5694edf47e802" alt="Logo">
-                </div>
-                <div class="topbar-brand-text">Ad_cycel</div>
-            </div>
-            <div class="topbar-user">
-                <div class="topbar-user-info"><div class="topbar-user-name">مدير المشروع</div><div class="topbar-user-role"><span class="pulse-dot"></span> متصل الآن</div></div>
-                <div class="topbar-avatar"><i class="fas fa-user-tie"></i></div>
-                <button class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i></button>
-            </div>
-        </header>
-        <div class="main-layout">
-            <nav class="sidebar">
-                <div class="sidebar-label">الرئيسية</div>
-                <button class="sidebar-item active" onclick="showAdminPage('overview',this)"><i class="fas fa-chart-pie"></i> نظرة عامة</button>
-                <button class="sidebar-item" onclick="showAdminPage('restaurants',this)"><i class="fas fa-store"></i> المطاعم <span class="sidebar-badge" id="restCountBadge">0</span></button>
-                <button class="sidebar-item" onclick="showAdminPage('packages',this)"><i class="fas fa-crown"></i> الباقات</button>
-                <div class="sidebar-label">البيانات</div>
-                <button class="sidebar-item" onclick="showAdminPage('leaderboard',this)"><i class="fas fa-trophy"></i> المتصدرين</button>
-                <button class="sidebar-item" onclick="showAdminPage('allCollections',this)"><i class="fas fa-list-check"></i> سجل الجمع</button>
-                <button class="sidebar-item" onclick="showAdminPage('rewardsAdmin',this)"><i class="fas fa-gift"></i> المكافآت</button>
-                <div class="sidebar-label">النظام</div>
-                <button class="sidebar-item" onclick="showAdminPage('settings',this)"><i class="fas fa-database"></i> النسخ الاحتياطي</button>
-            </nav>
+        <header class="topbar"><div class="topbar-brand"><div class="topbar-brand-icon"><img src="https://z-cdn-media.chatglm.cn/files/e3a354f3-0bb9-4a01-8f7e-1064f913a748.jpg?auth_key=1889499426-bbb8954530794cfeaa8e5def2ca3579a-0-6a0d15fd6f13550023c5694edf47e802" alt="Logo"></div><div class="topbar-brand-text">Ad_cycel</div></div><div class="topbar-user"><div class="topbar-user-info"><div class="topbar-user-name">مدير المشروع</div><div class="topbar-user-role"><span class="pulse-dot"></span> متصل الآن</div></div><div class="topbar-avatar"><i class="fas fa-user-tie"></i></div><button class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i></button></div></header>
+        <div class="main-layout"><nav class="sidebar"><div class="sidebar-label">الرئيسية</div><button class="sidebar-item active" onclick="showAdminPage('overview',this)"><i class="fas fa-chart-pie"></i> نظرة عامة</button><button class="sidebar-item" onclick="showAdminPage('restaurants',this)"><i class="fas fa-store"></i> المطاعم <span class="sidebar-badge" id="restCountBadge">0</span></button><button class="sidebar-item" onclick="showAdminPage('packages',this)"><i class="fas fa-crown"></i> الباقات</button><div class="sidebar-label">البيانات</div><button class="sidebar-item" onclick="showAdminPage('leaderboard',this)"><i class="fas fa-trophy"></i> المتصدرين</button><button class="sidebar-item" onclick="showAdminPage('allCollections',this)"><i class="fas fa-list-check"></i> سجل الجمع</button><button class="sidebar-item" onclick="showAdminPage('rewardsAdmin',this)"><i class="fas fa-gift"></i> المكافآت</button><div class="sidebar-label">النظام</div><button class="sidebar-item" onclick="showAdminPage('settings',this)"><i class="fas fa-database"></i> النسخ الاحتياطي</button></nav>
             <main class="content">
-                <div class="page active" id="admin-overview">
-                    <div class="page-header"><h1 class="page-title">نظرة عامة</h1><p class="page-desc">ملخص شامل لأداء مشروع جمع البلاستيك</p></div>
-                    <div class="stats-grid" id="adminStats"></div>
-                    <div class="table-container"><div class="table-header"><span class="table-title"><i class="fas fa-clock"></i> آخر عمليات الجمع</span></div>
-                        <table><thead><tr><th>المطعم</th><th>الكمية (كجم)</th><th>النقاط</th><th>التاريخ</th><th>الباقة</th></tr></thead><tbody id="recentCollectionsTable"></tbody></table>
-                    </div>
-                </div>
-                <div class="page" id="admin-restaurants">
-                    <div class="page-header"><h1 class="page-title">إدارة المطاعم</h1><p class="page-desc">عرض وإدارة جميع المطاعم المسجلة في المشروع</p></div>
-                    <div class="table-container"><div class="table-header"><span class="table-title"><i class="fas fa-store"></i> قائمة المطاعم</span></div>
-                        <table><thead><tr><th>#</th><th>المطعم</th><th>البريد الإلكتروني</th><th>الهاتف</th><th>إجمالي الكمية</th><th>النقاط</th><th>الباقة</th><th>إجراء</th></tr></thead><tbody id="restaurantsTable"></tbody></table>
-                    </div>
-                </div>
-                <div class="page" id="admin-packages">
-                    <div class="page-header"><h1 class="page-title">نظام الباقات</h1><p class="page-desc">الباقات الثلاث حسب حجم الجمع مع النقاط المقابلة</p></div>
-                    <div class="packages-grid" id="packagesGrid"></div>
-                </div>
-                <div class="page" id="admin-leaderboard">
-                    <div class="page-header"><h1 class="page-title">لوحة المتصدرين</h1><p class="page-desc">ترتيب المطاعم حسب النقاط المكتسبة</p></div>
-                    <div id="leaderboardList"></div>
-                </div>
+                <div class="page active" id="admin-overview"><div class="page-header"><h1 class="page-title">نظرة عامة</h1><p class="page-desc">ملخص شامل لأداء مشروع جمع البلاستيك</p></div><div class="stats-grid" id="adminStats"></div><div class="table-container"><div class="table-header"><span class="table-title"><i class="fas fa-clock"></i> آخر عمليات الجمع</span></div><table><thead><tr><th>المطعم</th><th>الكمية (كجم)</th><th>النقاط</th><th>التاريخ والوقت</th><th>الباقة</th></tr></thead><tbody id="recentCollectionsTable"></tbody></table></div></div>
+                <div class="page" id="admin-restaurants"><div class="page-header"><h1 class="page-title">إدارة المطاعم</h1><p class="page-desc">عرض وإدارة جميع المطاعم المسجلة في المشروع</p></div><div class="table-container"><div class="table-header"><span class="table-title"><i class="fas fa-store"></i> قائمة المطاعم</span></div><table><thead><tr><th>#</th><th>المطعم</th><th>البريد الإلكتروني</th><th>الهاتف</th><th>إجمالي الكمية</th><th>النقاط</th><th>الباقة</th><th>إجراء</th></tr></thead><tbody id="restaurantsTable"></tbody></table></div></div>
+                <div class="page" id="admin-packages"><div class="page-header"><h1 class="page-title">نظام الباقات</h1></div><div class="packages-grid" id="packagesGrid"></div></div>
+                <div class="page" id="admin-leaderboard"><div class="page-header"><h1 class="page-title">لوحة المتصدرين</h1></div><div id="leaderboardList"></div></div>
                 <div class="page" id="admin-allCollections">
-                    <div class="page-header"><h1 class="page-title">سجل جميع عمليات الجمع</h1><p class="page-desc">كل كميات البلاستيك التي تم جمعها</p></div>
+                    <div class="page-header"><h1 class="page-title">سجل عمليات الجمع</h1><p class="page-desc">إدخال الكمية التي تم جمعها من المستودع ومتابعة السجلات</p></div>
+                    <div class="form-card" style="margin-bottom:28px;">
+                        <div class="form-card-title"><i class="fas fa-plus-circle" style="color:var(--accent)"></i> تسجيل جمع جديد لمطعم</div>
+                        <div class="admin-add-form">
+                            <div class="form-group"><label>المطعم</label><select class="form-input" id="adminCollRest"></select></div>
+                            <div class="form-group"><label>الكمية (كجم)</label><input type="number" class="form-input" id="adminCollQty" placeholder="25" min="0.5" step="0.5"></div>
+                            <div class="form-group"><label>النوع</label><select class="form-input" id="adminCollType"><option value="water">مياه</option><option value="soft">غازية</option><option value="mixed">خليط</option></select></div>
+                            <div class="form-group"><label>ملاحظات</label><input type="text" class="form-input" id="adminCollNotes" placeholder="اختياري"></div>
+                        </div>
+                        <button class="btn btn-accent" onclick="adminSubmitCollection()"><i class="fas fa-check"></i> تأكيد الإدخال للمطعم</button>
+                    </div>
                     <div class="collection-list" id="allCollectionsList"></div>
                 </div>
-                <div class="page" id="admin-rewardsAdmin">
-                    <div class="page-header"><h1 class="page-title">إدارة المكافآت</h1><p class="page-desc">المكافآت المتاحة للمطاعم حسب النقاط</p></div>
-                    <div class="rewards-grid" id="rewardsAdminGrid"></div>
-                </div>
-                <div class="page" id="admin-settings">
-                    <div class="page-header"><h1 class="page-title">النسخ الاحتياطي وإدارة البيانات</h1><p class="page-desc">تصدير واستيراد وحذف بيانات التطبيق</p></div>
-                    <div class="stats-grid">
-                        <div class="stat-card green" style="cursor:pointer;" onclick="exportData()"><div class="stat-icon green"><i class="fas fa-download"></i></div><div class="stat-value" style="font-size:18px;">تصدير البيانات</div><div class="stat-label">تحميل نسخة احتياطية كملف JSON</div></div>
-                        <div class="stat-card gold" style="cursor:pointer;" onclick="document.getElementById('importFile').click()"><div class="stat-icon gold"><i class="fas fa-upload"></i></div><div class="stat-value" style="font-size:18px;">استيراد البيانات</div><div class="stat-label">استعادة من ملف نسخة احتياطية</div><input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)"></div>
-                        <div class="stat-card bronze" style="cursor:pointer;" onclick="resetAllData()"><div class="stat-icon bronze"><i class="fas fa-trash-alt"></i></div><div class="stat-value" style="font-size:18px;">مسح جميع البيانات</div><div class="stat-label">حذف كل شيء وإعادة التعيين</div></div>
-                    </div>
-                    <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-top:8px;">
-                        <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;"><i class="fas fa-info-circle" style="color:var(--accent);"></i> حالة التخزين</h3>
-                        <div id="storageInfo" style="font-size:13px;color:var(--fg2);line-height:2;"></div>
-                    </div>
-                </div>
+                <div class="page" id="admin-rewardsAdmin"><div class="page-header"><h1 class="page-title">إدارة المكافآت</h1></div><div class="rewards-grid" id="rewardsAdminGrid"></div></div>
+                <div class="page" id="admin-settings"><div class="page-header"><h1 class="page-title">النسخ الاحتياطي وإدارة البيانات</h1></div><div class="stats-grid"><div class="stat-card green" style="cursor:pointer;" onclick="exportData()"><div class="stat-icon green"><i class="fas fa-download"></i></div><div class="stat-value" style="font-size:18px;">تصدير البيانات</div><div class="stat-label">تحميل نسخة احتياطية كملف JSON</div></div><div class="stat-card gold" style="cursor:pointer;" onclick="document.getElementById('importFile').click()"><div class="stat-icon gold"><i class="fas fa-upload"></i></div><div class="stat-value" style="font-size:18px;">استيراد البيانات</div><div class="stat-label">استعادة من ملف نسخة احتياطية</div><input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)"></div><div class="stat-card bronze" style="cursor:pointer;" onclick="resetAllData()"><div class="stat-icon bronze"><i class="fas fa-trash-alt"></i></div><div class="stat-value" style="font-size:18px;">مسح جميع البيانات</div><div class="stat-label">حذف كل شيء وإعادة التعيين</div></div></div><div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-top:8px;"><h3 style="font-size:15px;font-weight:700;margin-bottom:12px;"><i class="fas fa-info-circle" style="color:var(--accent);"></i> حالة التخزين</h3><div id="storageInfo" style="font-size:13px;color:var(--fg2);line-height:2;"></div></div></div>
             </main>
         </div>
     </div>
 
-    <!-- واجهة المطعم -->
     <div id="restaurantDashboard" style="display:none;">
-        <header class="topbar">
-            <div class="topbar-brand">
-                <div class="topbar-brand-icon">
-                    <img src="https://z-cdn-media.chatglm.cn/files/e3a354f3-0bb9-4a01-8f7e-1064f913a748.jpg?auth_key=1889499426-bbb8954530794cfeaa8e5def2ca3579a-0-6a0d15fd6f13550023c5694edf47e802" alt="Logo">
-                </div>
-                <div class="topbar-brand-text">Ad_cycel</div>
-            </div>
-            <div class="topbar-user">
-                <div class="topbar-user-info"><div class="topbar-user-name" id="restTopbarName">المطعم</div><div class="topbar-user-role" id="restTopbarPkg"><span class="pulse-dot"></span> باقة برونزية</div></div>
-                <div class="topbar-avatar"><i class="fas fa-store"></i></div>
-                <button class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i></button>
-            </div>
-        </header>
-        <div class="main-layout restaurant-layout">
-            <nav class="sidebar">
-                <div class="sidebar-label">الرئيسية</div>
-                <button class="sidebar-item active" onclick="showRestPage('home',this)"><i class="fas fa-home"></i> الرئيسية</button>
-                <button class="sidebar-item" onclick="showRestPage('addCollection',this)"><i class="fas fa-plus-circle"></i> تسجيل جمع</button>
-                <button class="sidebar-item" onclick="showRestPage('myHistory',this)"><i class="fas fa-history"></i> سجلي</button>
-                <div class="sidebar-label">المزيد</div>
-                <button class="sidebar-item" onclick="showRestPage('myPackage',this)"><i class="fas fa-crown"></i> باقتي</button>
-                <button class="sidebar-item" onclick="showRestPage('myRewards',this)"><i class="fas fa-gift"></i> المكافآت</button>
-                <button class="sidebar-item" onclick="showRestPage('myLeaderboard',this)"><i class="fas fa-trophy"></i> الترتيب</button>
-            </nav>
-            <nav class="mobile-nav" id="restMobileNav">
-                <button class="mobile-nav-item active" onclick="showRestPage('home',this)"><i class="fas fa-home"></i>الرئيسية</button>
-                <button class="mobile-nav-item" onclick="showRestPage('addCollection',this)"><i class="fas fa-plus-circle"></i>تسجيل</button>
-                <button class="mobile-nav-item" onclick="showRestPage('myHistory',this)"><i class="fas fa-history"></i>سجلي</button>
-                <button class="mobile-nav-item" onclick="showRestPage('myPackage',this)"><i class="fas fa-crown"></i>باقتي</button>
-                <button class="mobile-nav-item" onclick="showRestPage('myRewards',this)"><i class="fas fa-gift"></i>مكافآت</button>
-                <button class="mobile-nav-item" onclick="showRestPage('myLeaderboard',this)"><i class="fas fa-trophy"></i>الترتيب</button>
-            </nav>
+        <header class="topbar"><div class="topbar-brand"><div class="topbar-brand-icon"><img src="https://z-cdn-media.chatglm.cn/files/e3a354f3-0bb9-4a01-8f7e-1064f913a748.jpg?auth_key=1889499426-bbb8954530794cfeaa8e5def2ca3579a-0-6a0d15fd6f13550023c5694edf47e802" alt="Logo"></div><div class="topbar-brand-text">Ad_cycel</div></div><div class="topbar-user"><div class="topbar-user-info"><div class="topbar-user-name" id="restTopbarName">المطعم</div><div class="topbar-user-role" id="restTopbarPkg"><span class="pulse-dot"></span> باقة برونزية</div></div><div class="topbar-avatar"><i class="fas fa-store"></i></div><button class="btn-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i></button></div></header>
+        <div class="main-layout restaurant-layout"><nav class="sidebar"><div class="sidebar-label">الرئيسية</div><button class="sidebar-item active" onclick="showRestPage('home',this)"><i class="fas fa-home"></i> الرئيسية</button><button class="sidebar-item" onclick="showRestPage('myHistory',this)"><i class="fas fa-history"></i> سجلي</button><div class="sidebar-label">المزيد</div><button class="sidebar-item" onclick="showRestPage('myPackage',this)"><i class="fas fa-crown"></i> باقتي</button><button class="sidebar-item" onclick="showRestPage('myRewards',this)"><i class="fas fa-gift"></i> المكافآت</button><button class="sidebar-item" onclick="showRestPage('myLeaderboard',this)"><i class="fas fa-trophy"></i> الترتيب</button></nav><nav class="mobile-nav" id="restMobileNav"><button class="mobile-nav-item active" onclick="showRestPage('home',this)"><i class="fas fa-home"></i>الرئيسية</button><button class="mobile-nav-item" onclick="showRestPage('myHistory',this)"><i class="fas fa-history"></i>سجلي</button><button class="mobile-nav-item" onclick="showRestPage('myPackage',this)"><i class="fas fa-crown"></i>باقتي</button><button class="mobile-nav-item" onclick="showRestPage('myRewards',this)"><i class="fas fa-gift"></i>مكافآت</button><button class="mobile-nav-item" onclick="showRestPage('myLeaderboard',this)"><i class="fas fa-trophy"></i>الترتيب</button></nav>
             <main class="content" style="padding-bottom:80px;">
-                <div class="page active" id="rest-home">
-                    
-                    <div class="motivation-section">
-                        <div class="motivation-text">
-                            <h3>كن بطلاً للبيئة! 🌍</h3>
-                            <p>كل زجاجة بلاستيكية تجمعها تنقذ كوكبنا وتزيد من مكافآتك. ابدأ الآن واصنع الفرق!</p>
-                        </div>
-                        <div class="motivation-images">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Recycling_-_PET_bottles_in_Dresden.jpg/640px-Recycling_-_PET_bottles_in_Dresden.jpg" alt="قوارير بلاستيكية للتدوير" onerror="this.style.display='none'">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Leaf_1.jpg/640px-Leaf_1.jpg" alt="طبيعة خضراء" onerror="this.style.display='none'">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Colored_Earth.png/640px-Colored_Earth.png" alt="كوكب الأرض" onerror="this.style.display='none'">
-                        </div>
-                    </div>
-
-                    <div class="welcome-banner">
-                        <div class="welcome-text"><h2 id="restWelcomeName">مرحباً بك</h2><p>ساهم في حماية البيئة واكسب نقاطاً ومكافآت مقابل كل كجم تجمعه</p></div>
-                        <button class="btn btn-accent btn-sm" onclick="showRestPage('addCollection')"><i class="fas fa-plus"></i> سجّل جمع جديد</button>
-                    </div>
-                    <div class="stats-grid" id="restStats"></div>
-                </div>
-                <div class="page" id="rest-addCollection">
-                    <div class="page-header"><h1 class="page-title">تسجيل عملية جمع جديدة</h1><p class="page-desc">أدخل كمية البلاستيك التي قمت بجمعها</p></div>
-                    <div class="form-card">
-                        <div class="form-card-title"><i class="fas fa-recycle" style="color:var(--accent)"></i> بيانات الجمع</div>
-                        <div class="form-group"><label>كمية البلاستيك (بالكيلوغرام)</label><input type="number" class="form-input" id="collectQty" placeholder="مثال: 25" min="0.5" step="0.5"></div>
-                        <div class="form-group"><label>نوع القوارير</label><select class="form-input" id="collectType"><option value="water">قوارير مياه</option><option value="soft">قوارير مشروبات غازية</option><option value="mixed">خليط</option></select></div>
-                        <div class="form-group"><label>ملاحظات (اختياري)</label><input type="text" class="form-input" id="collectNotes" placeholder="أي ملاحظات إضافية..."></div>
-                        <button class="btn btn-primary" onclick="submitCollection()" style="margin-top:8px;"><i class="fas fa-check-circle"></i> تأكيد التسجيل</button>
-                    </div>
-                </div>
-                <div class="page" id="rest-myHistory">
-                    <div class="page-header"><h1 class="page-title">سجل عمليات الجمع</h1><p class="page-desc">جميع الكميات التي سجلتها مسبقاً</p></div>
-                    <div class="collection-list" id="myHistoryList"></div>
-                </div>
-                <div class="page" id="rest-myPackage">
-                    <div class="page-header"><h1 class="page-title">باقتي الحالية</h1><p class="page-desc">معلومات عن الباقة التي أنت فيها وكيفية الترقية</p></div>
-                    <div id="myPackageDetails"></div>
-                </div>
-                <div class="page" id="rest-myRewards">
-                    <div class="page-header"><h1 class="page-title">المكافآت المتاحة</h1><p class="page-desc">استبدل نقاطك بمكافآت قيّمة</p></div>
-                    <div class="rewards-grid" id="myRewardsGrid"></div>
-                </div>
-                <div class="page" id="rest-myLeaderboard">
-                    <div class="page-header"><h1 class="page-title">ترتيب المطاعم</h1><p class="page-desc">شاهد مكانك بين المطاعم الأخرى</p></div>
-                    <div id="restLeaderboardList"></div>
-                </div>
+                <div class="page active" id="rest-home"><div class="motivation-section"><div class="motivation-text"><h3>كن بطلاً للبيئة! 🌍</h3><p>كل زجاجة بلاستيكية تجمعها تنقذ كوكبنا وتزيد من مكافآتك. تابع كميتك في سجل الجمع.</p></div><div class="motivation-images"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Recycling_-_PET_bottles_in_Dresden.jpg/640px-Recycling_-_PET_bottles_in_Dresden.jpg" alt="قوارير" onerror="this.style.display='none'"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Leaf_1.jpg/640px-Leaf_1.jpg" alt="طبيعة" onerror="this.style.display='none'"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Colored_Earth.png/640px-Colored_Earth.png" alt="أرض" onerror="this.style.display='none'"></div></div><div class="welcome-banner"><div class="welcome-text"><h2 id="restWelcomeName">مرحباً بك</h2><p>تابع كميات البلاستيك التي تم جمعها منك وكافآتك المكتسبة</p></div></div><div class="stats-grid" id="restStats"></div></div>
+                <div class="page" id="rest-myHistory"><div class="page-header"><h1 class="page-title">سجل عمليات الجمع</h1><p class="page-desc">جميع الكميات التي تم تحويلها من المستودع</p></div><div class="collection-list" id="myHistoryList"></div></div>
+                <div class="page" id="rest-myPackage"><div class="page-header"><h1 class="page-title">باقتي الحالية</h1></div><div id="myPackageDetails"></div></div>
+                <div class="page" id="rest-myRewards"><div class="page-header"><h1 class="page-title">المكافآت المتاحة</h1></div><div class="rewards-grid" id="myRewardsGrid"></div></div>
+                <div class="page" id="rest-myLeaderboard"><div class="page-header"><h1 class="page-title">ترتيب المطاعم</h1></div><div id="restLeaderboardList"></div></div>
             </main>
         </div>
     </div>
@@ -380,168 +228,126 @@
 
 <script>
 const STORAGE_KEY = 'adcycel_data';
-const PACKAGES = {
-    bronze:{name:'برونزية',icon:'fa-medal',minKg:0,maxKg:100,pointsPerKg:1,cssClass:'bronze',badgeClass:'badge-bronze',color:'var(--bronze)',barClass:'bronze-bar'},
-    silver:{name:'فضية',icon:'fa-medal',minKg:101,maxKg:300,pointsPerKg:2,cssClass:'silver',badgeClass:'badge-silver',color:'var(--silver)',barClass:'silver-bar'},
-    gold:{name:'ذهبية',icon:'fa-crown',minKg:301,maxKg:Infinity,pointsPerKg:3,cssClass:'gold',badgeClass:'badge-gold',color:'var(--gold)',barClass:'gold-bar'}
-};
-const REWARDS=[
-    {id:1,name:'شهادة شكر رسمية',pts:50,icon:'fa-certificate',desc:'شهادة تقدير من المشروع'},
-    {id:2,name:'خصم 10% على خدمات النظافة',pts:150,icon:'fa-broom',desc:'شريك مع شركة نظافة'},
-    {id:3,name:'لافتة "مطعم صديق البيئة"',pts:300,icon:'fa-sign-hanging',desc:'لافتة يتم تعليقها على المدخل'},
-    {id:4,name:'دعوة لحفل التكريم السنوي',pts:500,icon:'fa-glass-cheers',desc:'تذاكر لحفل اختتام المشروع'},
-    {id:5,name:'حملة إعلانية مجانية',pts:800,icon:'fa-bullhorn',desc:'ترويج عبر حسابات المشروع'},
-    {id:6,name:'درع التميز الذهبي',pts:1200,icon:'fa-award',desc:'درع تذكاري ذهبي مع جائزة مالية'}
-];
+const PACKAGES = { bronze:{name:'برونزية',icon:'fa-medal',minKg:0,maxKg:100,pointsPerKg:1,cssClass:'bronze',badgeClass:'badge-bronze',color:'var(--bronze)',barClass:'bronze-bar'}, silver:{name:'فضية',icon:'fa-medal',minKg:101,maxKg:300,pointsPerKg:2,cssClass:'silver',badgeClass:'badge-silver',color:'var(--silver)',barClass:'silver-bar'}, gold:{name:'ذهبية',icon:'fa-crown',minKg:301,maxKg:Infinity,pointsPerKg:3,cssClass:'gold',badgeClass:'badge-gold',color:'var(--gold)',barClass:'gold-bar'} };
+const REWARDS=[ {id:1,name:'شهادة شكر رسمية',pts:50,icon:'fa-certificate',desc:'شهادة تقدير من المشروع'}, {id:2,name:'خصم 10% على خدمات النظافة',pts:150,icon:'fa-broom',desc:'شريك مع شركة نظافة'}, {id:3,name:'لافتة "مطعم صديق البيئة"',pts:300,icon:'fa-sign-hanging',desc:'لافتة يتم تعليقها على المدخل'}, {id:4,name:'دعوة لحفل التكريم السنوي',pts:500,icon:'fa-glass-cheers',desc:'تذاكر لحفل اختتام المشروع'}, {id:5,name:'حملة إعلانية مجانية',pts:800,icon:'fa-bullhorn',desc:'ترويج عبر حسابات المشروع'}, {id:6,name:'درع التميز الذهبي',pts:1200,icon:'fa-award',desc:'درع تذكاري ذهبي مع جائزة مالية'} ];
 
-const DEFAULT_DATA={
-    restaurants:[
-        {id:1,name:'ATLANTA',phone:'0550123456',address:'الجزائر العاصمة - سطيف',email:'atlanta@mail.com',code:'1111',totalKg:340,points:0,spentPoints:0,claimedRewards:[]},
-        {id:2,name:'mega pizza',phone:'0661987654',address:'البليدة - العاصمة',email:'mega@mail.com',code:'2222',totalKg:180,points:0,spentPoints:0,claimedRewards:[]},
-        {id:3,name:'miga food',phone:'0771345678',address:'وهران - حي الراية',email:'miga@mail.com',code:'3333',totalKg:85,points:0,spentPoints:0,claimedRewards:[]},
-        {id:4,name:'nativo',phone:'0550123456',address:'قسنطينة - حي الشهداء',email:'nativo@mail.com',code:'4444',totalKg:420,points:0,spentPoints:0,claimedRewards:[]},
-        {id:5,name:'les platan',phone:'0552345678',address:'عنابة - حي البحيرة',email:'lesplatan@mail.com',code:'5555',totalKg:55,points:0,spentPoints:0,claimedRewards:[]}
-    ],
-    collections:[
-        {id:1,restId:1,qty:50,type:'water',notes:'جمع أولي',date:'2023-08-10T10:00:00Z',pointsEarned:50},
-        {id:2,restId:1,qty:90,type:'mixed',notes:'ترويج للباقة الفضية',date:'2023-09-15T14:30:00Z',pointsEarned:130},
-        {id:3,restId:1,qty:200,type:'soft',notes:'جمع كبير نهاية العام',date:'2023-10-20T09:15:00Z',pointsEarned:440},
-        {id:4,restId:2,qty:80,type:'water',notes:'بداية التعاون',date:'2023-09-05T11:00:00Z',pointsEarned:80},
-        {id:5,restId:2,qty:100,type:'mixed',notes:'تحسن ملحوظ',date:'2023-10-12T16:45:00Z',pointsEarned:180},
-        {id:6,restId:3,qty:85,type:'water',notes:'جمع الشهر الأول',date:'2023-10-01T08:30:00Z',pointsEarned:85},
-        {id:7,restId:4,qty:120,type:'soft',notes:'مطعم نشط جداً',date:'2023-07-15T13:20:00Z',pointsEarned:140},
-        {id:8,restId:4,qty:130,type:'water',notes:'الوصول للفضية',date:'2023-08-20T10:10:00Z',pointsEarned:260},
-        {id:9,restId:4,qty:170,type:'mixed',notes:'الوصول للذهبية!',date:'2023-09-25T15:00:00Z',pointsEarned:460},
-        {id:10,restId:5,qty:55,type:'water',notes:'بداية متواضعة',date:'2023-11-18T09:00:00Z',pointsEarned:55}
-    ],
-    nextCollectionId:11, nextRestId:6
-};
+const DEFAULT_DATA={ restaurants:[ {id:1,name:'ATLANTA',phone:'0550123456',address:'الجزائر العاصمة - سطيف',email:'atlanta@mail.com',code:'1111',totalKg:340,points:0,spentPoints:0,claimedRewards:[]}, {id:2,name:'mega pizza',phone:'0661987654',address:'البليدة - العاصمة',email:'mega@mail.com',code:'2222',totalKg:180,points:0,spentPoints:0,claimedRewards:[]}, {id:3,name:'miga food',phone:'0771345678',address:'وهران - حي الراية',email:'miga@mail.com',code:'3333',totalKg:85,points:0,spentPoints:0,claimedRewards:[]}, {id:4,name:'nativo',phone:'0550123456',address:'قسنطينة - حي الشهداء',email:'nativo@mail.com',code:'4444',totalKg:420,points:0,spentPoints:0,claimedRewards:[]}, {id:5,name:'les platan',phone:'0552345678',address:'عنابة - حي البحيرة',email:'lesplatan@mail.com',code:'5555',totalKg:55,points:0,spentPoints:0,claimedRewards:[]} ], collections:[ {id:1,restId:1,qty:50,type:'water',notes:'جمع أولي',date:'2023-08-10T10:00:00Z',pointsEarned:50}, {id:2,restId:1,qty:90,type:'mixed',notes:'ترويج للفضية',date:'2023-09-15T14:30:00Z',pointsEarned:130}, {id:3,restId:1,qty:200,type:'soft',notes:'جمع كبير',date:'2023-10-20T09:15:00Z',pointsEarned:440}, {id:4,restId:2,qty:80,type:'water',notes:'بداية التعاون',date:'2023-09-05T11:00:00Z',pointsEarned:80}, {id:5,restId:2,qty:100,type:'mixed',notes:'تحسن ملحوظ',date:'2023-10-12T16:45:00Z',pointsEarned:180}, {id:6,restId:3,qty:85,type:'water',notes:'جمع الشهر الأول',date:'2023-10-01T08:30:00Z',pointsEarned:85}, {id:7,restId:4,qty:120,type:'soft',notes:'مطعم نشط',date:'2023-07-15T13:20:00Z',pointsEarned:140}, {id:8,restId:4,qty:130,type:'water',notes:'الوصول للفضية',date:'2023-08-20T10:10:00Z',pointsEarned:260}, {id:9,restId:4,qty:170,type:'mixed',notes:'الوصول للذهبية!',date:'2023-09-25T15:00:00Z',pointsEarned:460}, {id:10,restId:5,qty:55,type:'water',notes:'بداية متواضعة',date:'2023-11-18T09:00:00Z',pointsEarned:55} ], nextCollectionId:11, nextRestId:6 };
 
 let restaurants=[],collections=[],nextCollectionId=1,nextRestId=6;
 let isRegistering=false,currentRestId=null;
-let currentResetOTP=null,currentResetEmail=null;
 
 function loadData(){
     try{
         const saved=localStorage.getItem(STORAGE_KEY);
-        if(saved){
-            const d=JSON.parse(saved);
-            restaurants=d.restaurants||[];
-            collections=d.collections||[];
-            nextCollectionId=d.nextCollectionId||1;
-            nextRestId=d.nextRestId||1;
-            restaurants.forEach(r => {
-                if(typeof r.spentPoints === 'undefined') r.spentPoints = 0; 
-                if(!r.email) r.email = r.name.toLowerCase().replace(/\s/g,'')+'@mail.com'; 
-                if(!r.code) r.code = '1234'; 
-                if(!r.claimedRewards) r.claimedRewards=[];
-            });
-            saveData();
-        } else {
-            restaurants=JSON.parse(JSON.stringify(DEFAULT_DATA.restaurants));
-            collections=JSON.parse(JSON.stringify(DEFAULT_DATA.collections));
-            nextCollectionId=DEFAULT_DATA.nextCollectionId;
-            nextRestId=DEFAULT_DATA.nextRestId;
-            recalcAllPoints();saveData();
+        if(saved){ const d=JSON.parse(saved); restaurants=d.restaurants||[]; collections=d.collections||[]; nextCollectionId=d.nextCollectionId||1; nextRestId=d.nextRestId||1; }
+        else{ 
+            restaurants=JSON.parse(JSON.stringify(DEFAULT_DATA.restaurants)); 
+            collections=JSON.parse(JSON.stringify(DEFAULT_DATA.collections)); 
+            nextCollectionId=DEFAULT_DATA.nextCollectionId; 
+            nextRestId=DEFAULT_DATA.nextRestId; 
+            recalcAllPoints();saveData(); 
         }
-    }catch(e){
-        console.error("Load Data Error:", e);
-        restaurants=JSON.parse(JSON.stringify(DEFAULT_DATA.restaurants));collections=JSON.parse(JSON.stringify(DEFAULT_DATA.collections));nextCollectionId=DEFAULT_DATA.nextCollectionId;nextRestId=DEFAULT_DATA.nextRestId;recalcAllPoints();
+        restaurants.forEach(r => { if(typeof r.spentPoints === 'undefined') r.spentPoints = 0; if(!r.email) r.email = r.name.toLowerCase().replace(/\s/g,'')+'@mail.com'; if(!r.code) r.code = '1234'; if(!r.claimedRewards) r.claimedRewards=[]; });
+        recalcAllPoints();
+        saveData();
+    }catch(e){ 
+        console.error("Load Data Error:", e); 
+        restaurants=JSON.parse(JSON.stringify(DEFAULT_DATA.restaurants));
+        collections=JSON.parse(JSON.stringify(DEFAULT_DATA.collections));
+        nextCollectionId=DEFAULT_DATA.nextCollectionId;
+        nextRestId=DEFAULT_DATA.nextRestId;
+        recalcAllPoints();
+        saveData();
     }
 }
 
 function saveData(){
-    try{
-        const dataStr = JSON.stringify({restaurants,collections,nextCollectionId,nextRestId});
-        localStorage.setItem(STORAGE_KEY, dataStr);
-        showSaveIndicator();
-    }catch(e){
-        console.error("Save Data Error Details:", e);
-        if (e.name === 'QuotaExceededError') {
-            showToast('امتلأ تخزين المتصفح! يرجى حذف بعض البيانات.', 'error');
-        } else {
-            showToast('خطأ غير متوقع في حفظ البيانات!', 'error');
-        }
-    }
-}
-function showSaveIndicator(){const el=document.getElementById('saveIndicator');el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2000);}
-function getPackage(kg){if(kg>=301)return PACKAGES.gold;if(kg>=101)return PACKAGES.silver;return PACKAGES.bronze;}
-function calcTotalPoints(kg){let p=0;p+=Math.min(kg,100)*1;if(kg>100)p+=Math.min(kg-100,200)*2;if(kg>300)p+=(kg-300)*3;return Math.round(p);}
-function recalcAllPoints(){restaurants.forEach(r=>{r.points=calcTotalPoints(r.totalKg);if(typeof r.spentPoints==='undefined')r.spentPoints=0;});}
-function formatDate(d){return new Date(d).toLocaleDateString('ar-SA',{year:'numeric',month:'short',day:'numeric'});}
-function typeLabel(t){return{water:'قوارير مياه',soft:'مشروبات غازية',mixed:'خليط'}[t]||t;}
-
-function showToast(msg,type='success'){const c=document.getElementById('toastContainer');const icons={success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle'};const t=document.createElement('div');t.className=`toast ${type}`;t.innerHTML=`<i class="fas ${icons[type]}"></i> ${msg}`;c.appendChild(t);setTimeout(()=>{t.style.animation='toastOut 0.4s ease forwards';setTimeout(()=>t.remove(),400);},3000);}
-function showModal(html){document.getElementById('modalContent').innerHTML=html;document.getElementById('modalOverlay').classList.add('show');}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
-document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
-
-function toggleRegister() {
-    isRegistering = !isRegistering;
-    document.getElementById('registerFields').style.display = isRegistering ? 'block' : 'none';
-    document.getElementById('loginCodeGroup').style.display = isRegistering ? 'none' : 'block';
-    document.getElementById('loginBtnText').innerText = isRegistering ? 'إنشاء حساب جديد' : 'تسجيل الدخول';
-    document.getElementById('toggleRegText').innerText = isRegistering ? 'لديك حساب بالفعل؟ سجل دخولك' : 'ليس لديك حساب؟ سجل الآن';
-    document.getElementById('forgotPassLink').style.display = isRegistering ? 'none' : 'block';
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ restaurants, collections, nextCollectionId, nextRestId }));
+        const ind = document.getElementById('saveIndicator');
+        if(ind){ ind.classList.add('show'); setTimeout(() => ind.classList.remove('show'), 2000); }
+    } catch(e) { console.error("Save Error:", e); }
 }
 
+function recalcAllPoints(){
+    restaurants.forEach(r => { r.totalKg = 0; r.points = 0; });
+    collections.forEach(c => {
+        const r = restaurants.find(rest => rest.id === c.restId);
+        if(r) { r.totalKg += c.qty; r.points += c.pointsEarned; }
+    });
+}
+
+function getRestPackage(totalKg) {
+    if(totalKg >= PACKAGES.gold.minKg) return PACKAGES.gold;
+    if(totalKg >= PACKAGES.silver.minKg) return PACKAGES.silver;
+    return PACKAGES.bronze;
+}
+
+// 1. إصلاح تسجيل الدخول وإنشاء الحساب (حفظ بيانات المطاعم)
 function handleLogin() {
     const email = document.getElementById('loginEmail').value.trim();
+    const code = document.getElementById('loginCode').value.trim();
 
-    if (isRegistering) {
-        const code = document.getElementById('regCode').value.trim();
-        const codeConfirm = document.getElementById('regCodeConfirm').value.trim();
-        const restName = document.getElementById('regRestName').value.trim();
+    if(!isRegistering) {
+        // وضعية تسجيل الدخول
+        if(!email || !code) return showToast('يرجى إدخال البريد وكلمة السر', 'warning');
+        
+        // التحقق من حساب المدير
+        if(email === 'admin@adcycel.com' && code === 'admin') {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            renderAdminDashboard();
+            return;
+        }
+
+        // التحقق من المطاعم
+        const rest = restaurants.find(r => r.email === email && r.code === code);
+        if(rest) {
+            currentRestId = rest.id;
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('restaurantDashboard').style.display = 'block';
+            renderRestDashboard(rest);
+        } else {
+            showToast('البريد الإلكتروني أو كلمة السر غير صحيحة', 'error');
+        }
+    } else {
+        // وضعية إنشاء حساب جديد (حفظ بيانات المطعم المسجل)
+        const name = document.getElementById('regRestName').value.trim();
         const phone = document.getElementById('regPhone').value.trim();
         const address = document.getElementById('regAddress').value.trim();
+        const regCode = document.getElementById('regCode').value.trim();
+        const regCodeConfirm = document.getElementById('regCodeConfirm').value.trim();
 
-        if (!email || !code || !restName || !phone || !address) { showToast('يرجى ملء جميع الحقول', 'error'); return; }
-        if (code !== codeConfirm) { showToast('كلمة السر وتأكيدها غير متطابقين', 'error'); return; }
-        if (restaurants.find(r => r.email === email)) { showToast('هذا البريد الإلكتروني مسجل مسبقاً!', 'error'); return; }
+        if(!name || !phone || !address || !email || !regCode) return showToast('يرجى ملء جميع الحقول المطلوبة', 'warning');
+        if(regCode !== regCodeConfirm) return showToast('كلمتا السر غير متطابقتين', 'error');
+        if(restaurants.find(r => r.email === email)) return showToast('هذا البريد الإلكتروني مسجل مسبقاً', 'error');
 
         const newRest = {
-            id: nextRestId,
-            name: restName,
-            phone: phone,
-            address: address,
-            email: email,
-            code: code,
+            id: nextRestId++,
+            name, phone, address, email,
+            code: regCode,
             totalKg: 0,
             points: 0,
             spentPoints: 0,
             claimedRewards: []
         };
+
         restaurants.push(newRest);
-        nextRestId++;
-        recalcAllPoints();
-        saveData();
-        showToast('تم إنشاء الحساب بنجاح! يمكنك تسجيل الدخول الآن', 'success');
-        toggleRegister(); 
+        saveData(); // حفظ بيانات المطعم الجديد في الذاكرة
+        showToast('تم التسجيل بنجاح! يمكنك تسجيل الدخول الآن', 'success');
+        toggleRegister(); // العودة لوضعية تسجيل الدخول
+        document.getElementById('loginEmail').value = email;
         document.getElementById('loginCode').value = '';
-        document.getElementById('regCode').value = '';
-        document.getElementById('regCodeConfirm').value = '';
-        return;
     }
+}
 
-    const code = document.getElementById('loginCode').value.trim();
-    if (!email || !code) { showToast('يرجى ملء البريد الإلكتروني وكلمة السر', 'error'); return; }
-
-    if (email === 'admin@adcycel.com' && code === 'admin123') {
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('adminDashboard').style.display = 'block';
-        renderAdminDashboard();
-        return;
-    }
-
-    const rest = restaurants.find(r => r.email === email && r.code === code);
-    if (rest) {
-        currentRestId = rest.id;
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('restaurantDashboard').style.display = 'block';
-        renderRestDashboard();
-    } else {
-        showToast('البريد الإلكتروني أو كلمة السر غير صحيحة', 'error');
-    }
+function toggleRegister() {
+    isRegistering = !isRegistering;
+    document.getElementById('registerFields').style.display = isRegistering ? 'block' : 'none';
+    document.getElementById('loginCodeGroup').style.display = isRegistering ? 'none' : 'block';
+    document.getElementById('forgotPassLink').style.display = isRegistering ? 'none' : 'block';
+    document.getElementById('loginBtnText').innerText = isRegistering ? 'إنشاء حساب' : 'تسجيل الدخول';
+    document.getElementById('toggleRegText').innerText = isRegistering ? 'لديك حساب؟ سجل الدخول' : 'ليس لديك حساب؟ سجل الآن';
 }
 
 function logout() {
@@ -554,230 +360,298 @@ function logout() {
 }
 
 function showForgotPassword() {
-    currentResetOTP = null; currentResetEmail = null;
-    showModal(`
-        <div id="forgotPhase1">
-            <div class="modal-title">استعادة كلمة السر</div>
-            <p style="color:var(--fg2);font-size:14px;margin-bottom:16px;">أدخل بريدك الإلكتروني المسجل لدينا لتلقي رمز التحقق.</p>
-            <div class="form-group"><label>البريد الإلكتروني</label><input type="email" class="form-input" id="forgotEmail" placeholder="example@domain.com"></div>
-            <div class="modal-actions"><button class="btn btn-sm btn-accent" onclick="sendResetCode()">إرسال رمز التحقق</button><button class="btn btn-sm btn-outline" onclick="closeModal()">إلغاء</button></div>
-        </div>
-        <div id="forgotPhase2" style="display:none;">
-            <div class="modal-title">تعيين كلمة السر الجديدة</div>
-            <p style="color:var(--fg2);font-size:14px;margin-bottom:16px;">أدخل الرمز الذي وصلك وكلمة السر الجديدة.</p>
-            <div class="form-group"><label>رمز التحقق (OTP)</label><input type="text" class="form-input" id="forgotOtp" placeholder="مثال: 4567"></div>
-            <div class="form-group"><label>كلمة السر الجديدة</label><input type="password" class="form-input" id="forgotNewPass" placeholder="اختر كلمة سر جديدة"></div>
-            <div class="modal-actions"><button class="btn btn-sm btn-accent" onclick="verifyAndResetPassword()">حفظ التغييرات</button><button class="btn btn-sm btn-outline" onclick="closeModal()">إلغاء</button></div>
-        </div>
-    `);
+    showToast('يرجى التواصل مع مدير النظام لاستعادة كلمة السر', 'warning');
 }
 
-function sendResetCode() {
-    const email = document.getElementById('forgotEmail').value.trim();
-    if (!email) { showToast('يرجى إدخال البريد الإلكتروني', 'error'); return; }
-    const rest = restaurants.find(r => r.email === email);
-    if (!rest) { showToast('هذا البريد غير مسجل في النظام', 'error'); return; }
-    currentResetOTP = Math.floor(1000 + Math.random() * 9000).toString();
-    currentResetEmail = email;
-    showToast(`رمز التحقق الخاص بك هو: ${currentResetOTP} (للمحاكاة فقط)`, 'warning');
-    document.getElementById('forgotPhase1').style.display = 'none';
-    document.getElementById('forgotPhase2').style.display = 'block';
-}
-
-function verifyAndResetPassword() {
-    const otp = document.getElementById('forgotOtp').value.trim();
-    const newPass = document.getElementById('forgotNewPass').value.trim();
-    if (!otp || !newPass) { showToast('يرجى ملء الرمز وكلمة السر', 'error'); return; }
-    if (otp !== currentResetOTP) { showToast('رمز التحقق غير صحيح', 'error'); return; }
-    const rest = restaurants.find(r => r.email === currentResetEmail);
-    if (rest) {
-        rest.code = newPass;
-        saveData();
-        closeModal();
-        showToast('تم تغيير كلمة السر بنجاح! يمكنك تسجيل الدخول الآن', 'success');
-    }
-}
-
-function showAdminPage(page, el) {
+// 2. التنقل بين الصفحات
+function showAdminPage(pageId, btn) {
     document.querySelectorAll('#adminDashboard .page').forEach(p => p.classList.remove('active'));
-    document.getElementById('admin-' + page).classList.add('active');
-    document.querySelectorAll('#adminDashboard .sidebar-item').forEach(i => i.classList.remove('active'));
-    if (el) el.classList.add('active');
-    if (page === 'settings') updateStorageInfo();
+    document.getElementById('admin-'+pageId).classList.add('active');
+    document.querySelectorAll('#adminDashboard .sidebar-item').forEach(b => b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+    if(pageId === 'restaurants') renderRestaurantsTable();
+    if(pageId === 'overview') renderAdminDashboard();
+    if(pageId === 'allCollections') renderAllCollections();
+    if(pageId === 'leaderboard') renderLeaderboard('leaderboardList');
+    if(pageId === 'packages') renderPackages();
+    if(pageId === 'rewardsAdmin') renderRewards('rewardsAdminGrid', true);
+    if(pageId === 'settings') renderStorageInfo();
 }
 
-function showRestPage(page, el) {
+function showRestPage(pageId, btn) {
     document.querySelectorAll('#restaurantDashboard .page').forEach(p => p.classList.remove('active'));
-    document.getElementById('rest-' + page).classList.add('active');
-    document.querySelectorAll('#restaurantDashboard .sidebar-item').forEach(i => i.classList.remove('active'));
-    document.querySelectorAll('#restaurantDashboard .mobile-nav-item').forEach(i => i.classList.remove('active'));
-    if (el) el.classList.add('active');
-    renderRestDashboard();
+    document.getElementById('rest-'+pageId).classList.add('active');
+    document.querySelectorAll('#restaurantDashboard .sidebar-item, #restaurantDashboard .mobile-nav-item').forEach(b => b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+    
+    if(pageId === 'myHistory') renderMyHistory();
+    if(pageId === 'myPackage') renderMyPackage();
+    if(pageId === 'myRewards') renderRewards('myRewardsGrid', false);
+    if(pageId === 'myLeaderboard') renderLeaderboard('restLeaderboardList');
 }
 
+// 3. عرض البيانات في لوحة تحكم المدير
 function renderAdminDashboard() {
-    document.getElementById('restCountBadge').innerText = restaurants.length;
-    const totalKg = restaurants.reduce((s, r) => s + r.totalKg, 0);
-    const totalPts = restaurants.reduce((s, r) => s + r.points, 0);
-    
+    const totalKg = collections.reduce((s,c) => s + c.qty, 0);
+    const totalPoints = restaurants.reduce((s,r) => s + r.points, 0);
     document.getElementById('adminStats').innerHTML = `
-        <div class="stat-card green"><div class="stat-icon green"><i class="fas fa-store"></i></?div><div class="stat-value">${restaurants.length}</div><div class="stat-label">المطاعم المسجلة</div></div>
-        <div class="stat-card gold"><div class="stat-icon gold"><i class="fas fa-weight-hanging"></i></div><div class="stat-value">${totalKg}</div><div class="stat-label">إجمالي الكمية (كجم)</div></div>
-        <div class="stat-card silver"><div class="stat-icon silver"><i class="fas fa-coins"></i></div><div class="stat-value">${totalPts}</div><div class="stat-label">إجمالي النقاط الممنوحة</div></div>
-        <div class="stat-card bronze"><div class="stat-icon bronze"><i class="fas fa-recycle"></i></div><div class="stat-value">${collections.length}</div><div class="stat-label">عمليات الجمع</div></div>
+        <div class="stat-card green"><div class="stat-icon green"><i class="fas fa-store"></i></div><div class="stat-value">${restaurants.length}</div><div class="stat-label">المطاعم المسجلة</div></div>
+        <div class="stat-card gold"><div class="stat-icon gold"><i class="fas fa-weight-hanging"></i></div><div class="stat-value">${totalKg} كجم</div><div class="stat-label">إجمالي البلاستيك</div></div>
+        <div class="stat-card silver"><div class="stat-icon silver"><i class="fas fa-coins"></i></div><div class="stat-value">${totalPoints}</div><div class="stat-label">إجمالي النقاط</div></div>
+        <div class="stat-card bronze"><div class="stat-icon bronze"><i class="fas fa-list-check"></i></div><div class="stat-value">${collections.length}</div><div class="stat-label">عمليات الجمع</div></div>
     `;
+    document.getElementById('restCountBadge').innerText = restaurants.length;
+    
+    // تحديث قائمة المطاعم في نموذج الإدخال
+    const sel = document.getElementById('adminCollRest');
+    sel.innerHTML = restaurants.map(r => `<option value="${r.id}">${r.name}</option>`).join('');
 
+    // آخر العمليات
     const recent = [...collections].sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
-    document.getElementById('recentCollectionsTable').innerHTML = recent.map(c => {
-        const r = restaurants.find(x => x.id === c.restId);
-        const pkg = getPackage(r ? r.totalKg : 0);
-        return `<tr><td>${r ? r.name : 'محذوف'}</td><td>${c.qty}</td><td>${c.pointsEarned}</td><td>${formatDate(c.date)}</td><td><span class="badge ${pkg.badgeClass}"><i class="fas ${pkg.icon}"></i> ${pkg.name}</span></td></tr>`;
+    const tbody = document.getElementById('recentCollectionsTable');
+    tbody.innerHTML = recent.map(c => {
+        const r = restaurants.find(rest => rest.id === c.restId);
+        const pkg = r ? getRestPackage(r.totalKg) : PACKAGES.bronze;
+        return `<tr>
+            <td>${r ? r.name : 'غير معروف'}</td>
+            <td>${c.qty}</td>
+            <td>${c.pointsEarned}</td>
+            <td>${new Date(c.date).toLocaleDateString('ar-DZ')}</td>
+            <td><span class="badge ${pkg.badgeClass}"><i class="fas fa-${pkg.icon}"></i> ${pkg.name}</span></td>
+        </tr>`;
     }).join('');
+}
 
-    document.getElementById('restaurantsTable').innerHTML = restaurants.map((r, i) => {
-        const pkg = getPackage(r.totalKg);
-        return `<tr><td>${i+1}</td><td>${r.name}</td><td style="direction:ltr;text-align:right;">${r.email}</td><td>${r.phone}</td><td>${r.totalKg} كجم</td><td>${r.points - r.spentPoints}</td><td><span class="badge ${pkg.badgeClass}"><i class="fas ${pkg.icon}"></i> ${pkg.name}</span></td><td><button class="btn btn-sm btn-danger" onclick="deleteRestaurant(${r.id})"><i class="fas fa-trash"></i></button></td></tr>`;
+function renderRestaurantsTable() {
+    const tbody = document.getElementById('restaurantsTable');
+    tbody.innerHTML = restaurants.map((r, i) => {
+        const pkg = getRestPackage(r.totalKg);
+        return `<tr>
+            <td>${i+1}</td><td>${r.name}</td><td>${r.email}</td><td>${r.phone}</td>
+            <td>${r.totalKg} كجم</td><td>${r.points}</td>
+            <td><span class="badge ${pkg.badgeClass}"><i class="fas fa-${pkg.icon}"></i> ${pkg.name}</span></td>
+            <td><button class="btn btn-sm btn-danger" onclick="deleteRestaurant(${r.id})"><i class="fas fa-trash"></i></button></td>
+        </tr>`;
     }).join('');
-
-    document.getElementById('packagesGrid').innerHTML = Object.values(PACKAGES).map(p => {
-        const count = restaurants.filter(r => getPackage(r.totalKg).name === p.name).length;
-        return `<div class="package-card ${p.cssClass}-pkg"><div class="package-badge">${p.name}</div><div class="package-icon"><i class="fas ${p.icon}"></i></div><div class="package-name">${p.name}</div><div class="package-range">${p.minKg} - ${p.maxKg === Infinity ? '∞' : p.maxKg} كجم</div><div class="package-points">${p.pointsPerKg} نقطة / كجم</div><div class="package-count">عدد المطاعم: <strong>${count}</strong></div></div>`;
-    }).join('');
-
-    const sorted = [...restaurants].sort((a,b) => b.points - a.points);
-    document.getElementById('leaderboardList').innerHTML = sorted.map((r, i) => {
-        const pkg = getPackage(r.totalKg);
-        const rc = i===0?'r1':i===1?'r2':i===2?'r3':'rn';
-        return `<div class="leaderboard-item"><div class="leaderboard-rank ${rc}">${i+1}</div><div class="leaderboard-info"><div class="leaderboard-name">${r.name}</div><div class="leaderboard-pkg">${pkg.name}</div></div><div><div class="leaderboard-pts">${r.points - r.spentPoints}</div><div class="leaderboard-pts-label">نقطة</div></div></div>`;
-    }).join('');
-
-    document.getElementById('allCollectionsList').innerHTML = [...collections].sort((a,b) => new Date(b.date) - new Date(a.date)).map(c => {
-        const r = restaurants.find(x => x.id === c.restId);
-        return `<div class="collection-item"><div class="collection-item-right"><div class="collection-item-icon"><i class="fas fa-recycle"></i></div><div><div>${r ? r.name : 'محذوف'}</div><div class="collection-item-date">${formatDate(c.date)} - ${typeLabel(c.type)}</div></div></div><div style="text-align:left;"><div class="collection-item-qty">${c.qty} كجم</div><div class="collection-item-pts">+${c.pointsEarned} نقطة</div></div></div>`;
-    }).join('');
-
-    document.getElementById('rewardsAdminGrid').innerHTML = REWARDS.map(rw => `<div class="reward-card"><div class="reward-icon"><i class="fas ${rw.icon}"></i></div><div class="reward-name">${rw.name}</div><div class="reward-pts">${rw.pts} نقطة</div><div style="font-size:12px;color:var(--muted);margin-top:8px;">${rw.desc}</div></div>`).join('');
 }
 
 function deleteRestaurant(id) {
-    showModal(`<div class="modal-title">حذف المطعم</div><p style="color:var(--danger);font-size:14px;">سيتم حذف المطعم وجميع سجلاته نهائياً.</p><div class="modal-actions"><button class="btn btn-sm btn-danger" onclick="confirmDeleteRest(${id})">حذف</button><button class="btn btn-sm btn-outline" onclick="closeModal()">إلغاء</button></div>`);
-}
-function confirmDeleteRest(id) {
+    if(!confirm('هل أنت متأكد من حذف هذا المطعم؟')) return;
     restaurants = restaurants.filter(r => r.id !== id);
     collections = collections.filter(c => c.restId !== id);
-    recalcAllPoints(); saveData(); closeModal(); renderAdminDashboard();
-    showToast('تم حذف المطعم بنجاح', 'success');
-}
-
-function exportData(){const data={restaurants,collections,nextCollectionId,nextRestId,exportDate:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`Adcycel_backup_${new Date().toISOString().split('T')[0]}.json`;a.click();URL.revokeObjectURL(url);showToast('تم تصدير النسخة الاحتياطية','success');}
-function importData(event){const file=event.target.files[0];if(!file)return;showModal(`<div class="modal-title">تأكيد الاستيراد</div><p style="color:var(--fg2);font-size:14px;">سيتم استبدال جميع البيانات الحالية بالبيانات من الملف.</p><div class="modal-actions"><button class="btn btn-sm btn-warning" onclick="confirmImport()">نعم، استبدل</button><button class="btn btn-sm btn-outline" onclick="closeModal()">إلغاء</button></div>`);window._importFile=file;event.target.value='';}
-function confirmImport(){const file=window._importFile;if(!file)return;const reader=new FileReader();reader.onload=function(e){try{const d=JSON.parse(e.target.result);if(!d.restaurants||!d.collections)throw new Error('ملف غير صالح');restaurants=d.restaurants;collections=d.collections;nextCollectionId=d.nextCollectionId||collections.length+1;nextRestId=d.nextRestId||restaurants.length+1;recalcAllPoints();saveData();closeModal();renderAdminDashboard();showToast('تم استيراد البيانات بنجاح!','success');}catch(err){closeModal();showToast('ملف غير صالح!','error');}};reader.readAsText(file);window._importFile=null;}
-function resetAllData(){showModal(`<div class="modal-title">مسح جميع البيانات</div><p style="color:var(--danger);font-size:14px;font-weight:700;margin-bottom:8px;">تحذير: لا يمكن التراجع عن هذا الإجراء!</p><div class="modal-actions"><button class="btn btn-sm btn-danger" onclick="confirmReset()">نعم، امسح الكل</button><button class="btn btn-sm btn-outline" onclick="closeModal()">إلغاء</button></div>`);}
-function confirmReset(){localStorage.removeItem(STORAGE_KEY);loadData();closeModal();renderAdminDashboard();showToast('تم مسح البيانات وإعادة التعيين','warning');}
-function updateStorageInfo(){const el=document.getElementById('storageInfo');if(!el)return;const saved=localStorage.getItem(STORAGE_KEY);const size=saved?(new Blob([saved]).size/1024).toFixed(2):'0';el.innerHTML=`<div><i class="fas fa-database" style="color:var(--accent);"></i> حجم البيانات: <strong>${size} كيلوبايت</strong></div><div><i class="fas fa-store" style="color:var(--gold);"></i> عدد المطاعم: <strong>${restaurants.length}</strong></div><div><i class="fas fa-list" style="color:var(--silver);"></i> سجلات الجمع: <strong>${collections.length}</strong></div><div><i class="fas fa-clock" style="color:var(--muted);"></i> آخر حفظ: <strong>${new Date().toLocaleString('ar-SA')}</strong></div>`;}
-
-function renderRestDashboard() {
-    const rest = restaurants.find(r => r.id === currentRestId);
-    if (!rest) return;
-
-    const pkg = getPackage(rest.totalKg);
-    const availablePoints = rest.points - rest.spentPoints;
-
-    document.getElementById('restTopbarName').innerText = rest.name;
-    document.getElementById('restTopbarPkg').innerHTML = `<span class="pulse-dot"></span> باقة ${pkg.name}`;
-    document.getElementById('restWelcomeName').innerText = `مرحباً بك، ${rest.name}`;
-
-    document.getElementById('restStats').innerHTML = `
-        <div class="stat-card green"><div class="stat-icon green"><i class="fas fa-weight-hanging"></i></div><div class="stat-value">${rest.totalKg}</div><div class="stat-label">إجمالي الكمية (كجم)</div></div>
-        <div class="stat-card gold"><div class="stat-icon gold"><i class="fas fa-coins"></i></div><div class="stat-value">${availablePoints}</div><div class="stat-label">نقاطك المتاحة</div></div>
-        <div class="stat-card silver"><div class="stat-icon silver"><i class="fas fa-trophy"></i></div><div class="stat-value">${pkg.name}</div><div class="stat-label">باقتك الحالية</div></div>
-    `;
-
-    const myColl = collections.filter(c => c.restId === rest.id).sort((a,b) => new Date(b.date) - new Date(a.date));
-    document.getElementById('myHistoryList').innerHTML = myColl.length === 0 ? '<p style="color:var(--muted);">لا توجد سجلات بعد</p>' : myColl.map(c => `<div class="collection-item"><div class="collection-item-right"><div class="collection-item-icon"><i class="fas fa-recycle"></i></div><div><div>${typeLabel(c.type)}</div><div class="collection-item-date">${formatDate(c.date)}</div></div></div><div style="text-align:left;"><div class="collection-item-qty">${c.qty} كجم</div><div class="collection-item-pts">+${c.pointsEarned} نقطة</div></div></div>`).join('');
-
-    let nextPkg = null, nextKg = 0;
-    if (pkg.name === 'برونزية') { nextPkg = PACKAGES.silver; nextKg = 101 - rest.totalKg; }
-    else if (pkg.name === 'فضية') { nextPkg = PACKAGES.gold; nextKg = 301 - rest.totalKg; }
-
-    document.getElementById('myPackageDetails').innerHTML = `
-        <div class="package-card ${pkg.cssClass}-pkg" style="max-width:400px;margin:0 auto;">
-            <div class="package-badge">${pkg.name}</div><div class="package-icon"><i class="fas ${pkg.icon}"></i></div><div class="package-name">${pkg.name}</div><div class="package-points">${pkg.pointsPerKg} نقطة / كجم</div>
-            <div style="font-size:13px;color:var(--fg2);">الكمية الحالية: <strong>${rest.totalKg} كجم</strong></div>
-            ${nextPkg ? `<div style="margin-top:16px;font-size:13px;color:var(--gold);">تحتاج ${nextKg} كجم إضافية للترقية للباقة ${nextPkg.name}</div><div class="progress-bar-container"><div class="progress-bar ${nextPkg.barClass}" style="width:${(rest.totalKg / nextPkg.minKg)*100}%"></div></div>` : '<div style="margin-top:16px;font-size:13px;color:var(--gold);">لقد وصلت لأعلى باقة! 🎉</div>'}
-        </div>
-    `;
-
-    document.getElementById('myRewardsGrid').innerHTML = REWARDS.map(rw => {
-        const locked = availablePoints < rw.pts;
-        const claimed = rest.claimedRewards.includes(rw.id);
-        return `<div class="reward-card ${locked && !claimed ? 'locked' : ''}"><div class="reward-icon"><i class="fas ${rw.icon}"></i></div><div class="reward-name">${rw.name}</div><div class="reward-pts">${rw.pts} نقطة</div><div style="font-size:12px;color:var(--muted);margin-top:8px;">${rw.desc}</div><div class="reward-btn">${claimed ? '<button class="btn btn-sm btn-outline" disabled><i class="fas fa-check"></i> تم الاستبدال</button>' : (locked ? '' : `<button class="btn btn-sm btn-accent" onclick="claimReward(${rw.id})"><i class="fas fa-gift"></i> استبدل</button>`)}</div></div>`;
-    }).join('');
-
-    const sorted = [...restaurants].sort((a,b) => b.points - a.points);
-    document.getElementById('restLeaderboardList').innerHTML = sorted.map((r, i) => {
-        const rp = getPackage(r.totalKg);
-        const rc = i===0?'r1':i===1?'r2':i===2?'r3':'rn';
-        const isMe = r.id === rest.id;
-        return `<div class="leaderboard-item" style="${isMe ? 'border-color:var(--accent);background:rgba(0,230,118,0.05);' : ''}"><div class="leaderboard-rank ${rc}">${i+1}</div><div class="leaderboard-info"><div class="leaderboard-name">${r.name} ${isMe ? '(أنت)' : ''}</div><div class="leaderboard-pkg">${rp.name}</div></div><div><div class="leaderboard-pts">${r.points - r.spentPoints}</div><div class="leaderboard-pts-label">نقطة</div></div></div>`;
-    }).join('');
-}
-
-function submitCollection() {
-    const qty = parseFloat(document.getElementById('collectQty').value);
-    const type = document.getElementById('collectType').value;
-    const notes = document.getElementById('collectNotes').value.trim();
-
-    if (!qty || qty <= 0) { showToast('يرجى إدخال كمية صحيحة', 'error'); return; }
-
-    const rest = restaurants.find(r => r.id === currentRestId);
-    if (!rest) return;
-
-    const pkg = getPackage(rest.totalKg + qty);
-    const earnedPts = Math.round(qty * pkg.pointsPerKg);
-
-    const coll = {
-        id: nextCollectionId++,
-        restId: rest.id,
-        qty: qty,
-        type: type,
-        notes: notes,
-        date: new Date().toISOString(),
-        pointsEarned: earnedPts
-    };
-
-    collections.push(coll);
-    rest.totalKg += qty;
     recalcAllPoints();
     saveData();
+    renderRestaurantsTable();
+    showToast('تم حذف المطعم', 'success');
+}
 
-    document.getElementById('collectQty').value = '';
-    document.getElementById('collectNotes').value = '';
+function adminSubmitCollection() {
+    const restId = parseInt(document.getElementById('adminCollRest').value);
+    const qty = parseFloat(document.getElementById('adminCollQty').value);
+    const type = document.getElementById('adminCollType').value;
+    const notes = document.getElementById('adminCollNotes').value;
+
+    if(!restId || !qty || qty <= 0) return showToast('يرجى إدخال بيانات صحيحة', 'warning');
+
+    const rest = restaurants.find(r => r.id === restId);
+    if(!rest) return;
+
+    const pkg = getRestPackage(rest.totalKg); 
+    const pointsEarned = qty * pkg.pointsPerKg;
+
+    collections.push({
+        id: nextCollectionId++,
+        restId, qty, type, notes,
+        date: new Date().toISOString(),
+        pointsEarned
+    });
+
+    recalcAllPoints();
+    saveData();
     
-    showToast(`تم تسجيل ${qty} كجم وكسبت ${earnedPts} نقطة!`, 'success');
-    showRestPage('home', document.querySelector('#restaurantDashboard .sidebar-item'));
+    document.getElementById('adminCollQty').value = '';
+    document.getElementById('adminCollNotes').value = '';
+    renderAdminDashboard();
+    renderAllCollections();
+    showToast(`تم إضافة ${qty} كجم واحتساب ${pointsEarned} نقطة`, 'success');
+}
+
+function renderAllCollections() {
+    const list = document.getElementById('allCollectionsList');
+    const sorted = [...collections].sort((a,b) => new Date(b.date) - new Date(a.date));
+    list.innerHTML = sorted.map(c => {
+        const r = restaurants.find(rest => rest.id === c.restId);
+        return `<div class="collection-item">
+            <div class="collection-item-right">
+                <div class="collection-item-icon"><i class="fas fa-recycle"></i></div>
+                <div><div style="font-weight:700">${r ? r.name : 'غير معروف'}</div><div class="collection-item-date">${new Date(c.date).toLocaleString('ar-DZ')} - ${c.notes || 'بدون ملاحظة'}</div></div>
+            </div>
+            <div style="text-align:left"><div class="collection-item-qty">${c.qty} كجم</div><div class="collection-item-pts">+${c.pointsEarned} نقطة</div></div>
+        </div>`;
+    }).join('');
+}
+
+function renderLeaderboard(containerId) {
+    const list = document.getElementById(containerId);
+    const sorted = [...restaurants].sort((a,b) => b.points - a.points);
+    list.innerHTML = sorted.map((r, i) => {
+        const pkg = getRestPackage(r.totalKg);
+        const rankClass = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : 'rn';
+        return `<div class="leaderboard-item">
+            <div class="leaderboard-rank ${rankClass}">${i+1}</div>
+            <div class="leaderboard-info"><div class="leaderboard-name">${r.name}</div><div class="leaderboard-pkg"><i class="fas fa-${pkg.icon}"></i> باقة ${pkg.name}</div></div>
+            <div style="text-align:center"><div class="leaderboard-pts">${r.points}</div><div class="leaderboard-pts-label">نقطة</div></div>
+        </div>`;
+    }).join('');
+}
+
+function renderPackages() {
+    const grid = document.getElementById('packagesGrid');
+    grid.innerHTML = Object.values(PACKAGES).map(pkg => {
+        const count = restaurants.filter(r => getRestPackage(r.totalKg).name === pkg.name).length;
+        return `<div class="package-card ${pkg.cssClass}-pkg">
+            <div class="package-badge">${pkg.name}</div>
+            <div class="package-icon"><i class="fas fa-${pkg.icon}"></i></div>
+            <div class="package-name">${pkg.name}</div>
+            <div class="package-range">${pkg.minKg} - ${pkg.maxKg === Infinity ? '∞' : pkg.maxKg} كجم</div>
+            <div class="package-points">${pkg.pointsPerKg} نقطة / كجم</div>
+            <div class="package-count">المطاعم في هذه الباقة: <strong>${count}</strong></div>
+        </div>`;
+    }).join('');
+}
+
+function renderRewards(containerId, isAdmin) {
+    const grid = document.getElementById(containerId);
+    const rest = restaurants.find(r => r.id === currentRestId);
+    grid.innerHTML = REWARDS.map(rew => {
+        const isLocked = rest ? rest.points < rew.pts : true;
+        return `<div class="reward-card ${isLocked ? 'locked' : ''}">
+            <div class="reward-icon"><i class="fas fa-${rew.icon}"></i></div>
+            <div class="reward-name">${rew.name}</div>
+            <div class="reward-pts">${rew.pts} نقطة</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px">${rew.desc}</div>
+            ${!isAdmin && !isLocked ? `<button class="btn btn-sm btn-accent reward-btn" onclick="claimReward(${rew.id})">استلام</button>` : ''}
+        </div>`;
+    }).join('');
 }
 
 function claimReward(id) {
     const rest = restaurants.find(r => r.id === currentRestId);
-    const reward = REWARDS.find(r => r.id === id);
-    if (!rest || !reward) return;
-
-    const availablePoints = rest.points - rest.spentPoints;
-    if (availablePoints < reward.pts) { showToast('نقاطك غير كافية', 'error'); return; }
-
-    showModal(`<div class="modal-title">تأكيد استبدال المكافأة</div><p style="color:var(--fg2);font-size:14px;">سيتم خصم ${reward.pts} نقطة من رصيدك للحصول على: ${reward.name}</p><div class="modal-actions"><button class="btn btn-sm btn-accent" onclick="confirmClaimReward(${id})">تأكيد</button><button class="btn btn-sm btn-outline" onclick="closeModal()">إلغاء</button></div>`);
-}
-
-function confirmClaimReward(id) {
-    const rest = restaurants.find(r => r.id === currentRestId);
-    const reward = REWARDS.find(r => r.id === id);
-    rest.spentPoints += reward.pts;
+    const rew = REWARDS.find(r => r.id === id);
+    if(!rest || !rew || rest.points < rew.pts) return;
+    rest.spentPoints += rew.pts;
     rest.claimedRewards.push(id);
-    saveData(); closeModal(); renderRestDashboard();
-    showToast('تم استبدال المكافأة بنجاح!', 'success');
+    saveData();
+    renderRestDashboard(rest);
+    showRestPage('myRewards', document.querySelector('.sidebar-item[onclick*="myRewards"]'));
+    showToast(`تم استلام المكافأة: ${rew.name}`, 'success');
 }
 
+// 4. عرض بيانات المطعم
+function renderRestDashboard(rest) {
+    document.getElementById('restTopbarName').innerText = rest.name;
+    const pkg = getRestPackage(rest.totalKg);
+    document.getElementById('restTopbarPkg').innerHTML = `<span class="pulse-dot"></span> باقة ${pkg.name}`;
+    document.getElementById('restWelcomeName').innerText = `مرحباً بك، ${rest.name}`;
+    
+    document.getElementById('restStats').innerHTML = `
+        <div class="stat-card green"><div class="stat-icon green"><i class="fas fa-weight-hanging"></i></div><div class="stat-value">${rest.totalKg} كجم</div><div class="stat-label">إجمالي الكمية</div></div>
+        <div class="stat-card gold"><div class="stat-icon gold"><i class="fas fa-coins"></i></div><div class="stat-value">${rest.points - rest.spentPoints}</div><div class="stat-label">رصيد نقاطك</div></div>
+        <div class="stat-card silver"><div class="stat-icon silver"><i class="fas fa-${pkg.icon}"></i></div><div class="stat-value">${pkg.name}</div><div class="stat-label">باقتك الحالية</div></div>
+    `;
+}
+
+function renderMyHistory() {
+    const list = document.getElementById('myHistoryList');
+    const myColl = collections.filter(c => c.restId === currentRestId).sort((a,b) => new Date(b.date) - new Date(a.date));
+    list.innerHTML = myColl.map(c => `<div class="collection-item">
+        <div class="collection-item-right">
+            <div class="collection-item-icon"><i class="fas fa-recycle"></i></div>
+            <div><div style="font-weight:700">${c.type === 'water' ? 'مياه' : c.type === 'soft' ? 'غازية' : 'خليط'}</div><div class="collection-item-date">${new Date(c.date).toLocaleString('ar-DZ')}</div></div>
+        </div>
+        <div style="text-align:left"><div class="collection-item-qty">${c.qty} كجم</div><div class="collection-item-pts">+${c.pointsEarned} نقطة</div></div>
+    </div>`).join('');
+}
+
+function renderMyPackage() {
+    const container = document.getElementById('myPackageDetails');
+    const rest = restaurants.find(r => r.id === currentRestId);
+    if(!rest) return;
+    const pkg = getRestPackage(rest.totalKg);
+    const nextPkg = pkg === PACKAGES.bronze ? PACKAGES.silver : PACKAGES.gold;
+    const progress = pkg === PACKAGES.gold ? 100 : ((rest.totalKg - pkg.minKg) / (nextPkg.minKg - pkg.minKg)) * 100;
+
+    container.innerHTML = `
+        <div class="package-card ${pkg.cssClass}-pkg" style="max-width:400px;margin:0 auto;">
+            <div class="package-badge">${pkg.name}</div>
+            <div class="package-icon"><i class="fas fa-${pkg.icon}"></i></div>
+            <div class="package-name">${pkg.name}</div>
+            <div class="package-points">${pkg.pointsPerKg} نقطة / كجم</div>
+            ${pkg !== PACKAGES.gold ? `<div style="margin-top:12px"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--fg2)"><span>${pkg.minKg} كجم</span><span>${nextPkg.minKg} كجم</span></div><div class="progress-bar-container"><div class="progress-bar ${pkg.barClass}" style="width:${Math.min(progress, 100)}%"></div></div></div>` : '<div style="margin-top:12px;color:var(--gold)">لقد وصلت للباقة القصوى! 🎉</div>'}
+        </div>
+    `;
+}
+
+// 5. إعدادات النظام
+function renderStorageInfo() {
+    const size = new Blob([localStorage.getItem(STORAGE_KEY)]).size;
+    const kb = (size / 1024).toFixed(2);
+    document.getElementById('storageInfo').innerHTML = `
+        المساحة المستخدمة: <strong>${kb} KB</strong><br>
+        عدد المطاعم: <strong>${restaurants.length}</strong><br>
+        عدد العمليات: <strong>${collections.length}</strong>
+    `;
+}
+
+function exportData() {
+    const dataStr = JSON.stringify({ restaurants, collections, nextCollectionId, nextRestId }, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'adcycel_backup.json'; a.click();
+    URL.revokeObjectURL(url);
+    showToast('تم تصدير البيانات بنجاح', 'success');
+}
+
+function importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            if (data.restaurants && data.collections) {
+                restaurants = data.restaurants; collections = data.collections;
+                nextCollectionId = data.nextCollectionId || 1; nextRestId = data.nextRestId || 1;
+                saveData(); recalcAllPoints(); renderAdminDashboard();
+                showToast('تم استيراد البيانات بنجاح', 'success');
+            } else { showToast('ملف غير صالح', 'error'); }
+        } catch (err) { showToast('خطأ في قراءة الملف', 'error'); }
+    };
+    reader.readAsText(file);
+}
+
+function resetAllData() {
+    if (confirm('هل أنت متأكد من مسح جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.')) {
+        localStorage.removeItem(STORAGE_KEY);
+        loadData(); 
+        renderAdminDashboard();
+        showToast('تم مسح البيانات وإعادة التحميل', 'success');
+    }
+}
+
+// 6. إشعارات Toast
+function showToast(msg, type = 'success') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const iconMap = { success: 'fa-check-circle', error: 'fa-times-circle', warning: 'fa-exclamation-triangle' };
+    toast.innerHTML = `<i class="fas ${iconMap[type] || iconMap.success}"></i> ${msg}`;
+    container.appendChild(toast);
+    setTimeout(() => { toast.style.animation = 'toastOut 0.4s ease forwards'; setTimeout(() => toast.remove(), 400); }, 3000);
+}
+
+// تشغيل التطبيق
 loadData();
 </script>
 </body>
