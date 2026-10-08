@@ -234,7 +234,35 @@ const STORAGE_KEY = 'adcycel_data';
 const PACKAGES = { bronze:{name:'برونزية',icon:'fa-medal',minKg:0,maxKg:100,cssClass:'bronze',badgeClass:'badge-bronze',color:'var(--bronze)',barClass:'bronze-bar'}, silver:{name:'فضية',icon:'fa-medal',minKg:101,maxKg:300,cssClass:'silver',badgeClass:'badge-silver',color:'var(--silver)',barClass:'silver-bar'}, gold:{name:'ذهبية',icon:'fa-crown',minKg:301,maxKg:Infinity,cssClass:'gold',badgeClass:'badge-gold',color:'var(--gold)',barClass:'gold-bar'} };
 const REWARDS=[ {id:1,name:'شهادة شكر رسمية',pts:50,icon:'fa-certificate',desc:'شهادة تقدير من المشروع'}, {id:2,name:'خصم 10% على خدمات النظافة',pts:150,icon:'fa-broom',desc:'شريك مع شركة نظافة'}, {id:3,name:'لافتة "مطعم صديق البيئة"',pts:300,icon:'fa-sign-hanging',desc:'لافتة يتم تعليقها على المدخل'}, {id:4,name:'دعوة لحفل التكريم السنوي',pts:500,icon:'fa-glass-cheers',desc:'تذاكر لحفل اختتام المشروع'}, {id:5,name:'حملة إعلانية مجانية',pts:800,icon:'fa-bullhorn',desc:'ترويج عبر حسابات المشروع'}, {id:6,name:'درع التميز الذهبي',pts:1200,icon:'fa-award',desc:'درع تذكاري ذهبي مع جائزة مالية'} ];
 
-const DEFAULT_DATA={ restaurants:[ {id:1,name:'ATLANTA',phone:'0550123456',address:'الجزائر العاصمة - سطيف',email:'atlanta@mail.com',code:'1111',barcode:'CYC-A1B2C',totalKg:340,points:0,spentPoints:0,claimedRewards:[]}, {id:2,name:'mega pizza',phone:'0661987654',address:'البليدة - العاصمة',email:'mega@mail.com',code:'2222',barcode:'CYC-D3E4F',totalKg:180,points:0,spentPoints:0,claimedRewards:[]}, {id:3,name:'miga food',phone:'0771345678',address:'وهران - حي الراية',email:'miga@mail.com',code:'3333',barcode:'CYC-G5H6I',totalKg:85,points:0,spentPoints:0,claimedRewards:[]}, {id:4,name:'nativo',phone:'0550123456',address:'قسنطينة - حي الشهداء',email:'nativo@mail.com',code:'4444',barcode:'CYC-J7K8L',totalKg:420,points:0,spentPoints:0,claimedRewards:[]}, {id:5,name:'les platan',phone:'0552345678',address:'عنابة - حي البحيرة',email:'lesplatan@mail.com',code:'5555',barcode:'CYC-M9N0O',totalKg:55,points:0,spentPoints:0,claimedRewards:[]} ], collections:[ {id:1,restId:1,qty:50,type:'water',notes:'جمع أولي',date:'2023-08-10T10:00:00Z',pointsEarned:500}, {id:2,restId:1,qty:90,type:'mixed',notes:'ترويج للفضية',date:'2023-09-15T14:30:00Z',pointsEarned:900}, {id:3,restId:1,qty:200,type:'soft',notes:'جمع كبير',date:'2023-10-20T09:15:00Z',pointsEarned:2000}, {id:4,restId:2,qty:80,type:'water',notes:'بداية التعاون',date:'2023-09-05T11:00:00Z',pointsEarned:800}, {id:5,restId:2,qty:100,type:'mixed',notes:'تحسن ملحوظ',date:'2023-10-12T16:45:00Z',pointsEarned:1000}, {id:6,restId:3,qty:85,type:'water',notes:'جمع الشهر الأول',date:'2023-10-01T08:30:00Z',pointsEarned:850}, {id:7,restId:4,qty:120,type:'soft',notes:'مطعم نشط',date:'2023-07-15T13:20:00Z',pointsEarned:1200}, {id:8,restId:4,qty:130,type:'water',notes:'الوصول للفضية',date:'2023-08-20T10:10:00Z',pointsEarned:1300}, {id:9,restId:4,qty:170,type:'mixed',notes:'الوصول للذهبية!',date:'2023-09-25T15:00:00Z',pointsEarned:1700}, {id:10,restId:5,qty:55,type:'water',notes:'بداية متواضعة',date:'2023-11-18T09:00:00Z',pointsEarned:550} ], nextCollectionId:11, nextRestId:6 };
+// تحديث بيانات المطاعم الافتراضية لتطابق الجدول المرسل
+const DEFAULT_DATA={ 
+    restaurants:[ 
+        {id:1,name:'Mega Pizza',phone:'0550000001',address:'الجزائر',email:'mega.pizza@mail.com',code:'1111',barcode:'CYC-MPG01',totalKg:2.44,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:2,name:'Miga Food',phone:'0550000002',address:'البليدة',email:'miga.food@mail.com',code:'2222',barcode:'CYC-MFD02',totalKg:5.70,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:3,name:'Nativo',phone:'0550000003',address:'قسنطينة',email:'nativo@mail.com',code:'3333',barcode:'CYC-NAT03',totalKg:6.84,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:4,name:'Les Platan',phone:'0550000004',address:'عنابة',email:'les.platan@mail.com',code:'4444',barcode:'CYC-LPL04',totalKg:4.23,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:5,name:'Restaurant À La Cabane',phone:'0550000005',address:'الجزائر',email:'cabane@mail.com',code:'5555',barcode:'CYC-ALC05',totalKg:9.47,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:6,name:'Smash-is Jijel',phone:'0550000006',address:'جيجل',email:'smash.jijel@mail.com',code:'6666',barcode:'CYC-SIJ06',totalKg:11.24,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:7,name:'Le Mistral',phone:'0550000007',address:'وهران',email:'le.mistral@mail.com',code:'7777',barcode:'CYC-LMS07',totalKg:11.70,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:8,name:'La Véranda',phone:'0550000008',address:'تلمسان',email:'la.veranda@mail.com',code:'8888',barcode:'CYC-LVR08',totalKg:10.00,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:9,name:'Restaurant Top Chef',phone:'0550000009',address:'سطيف',email:'top.chef@mail.com',code:'9999',barcode:'CYC-RTC09',totalKg:10.64,points:0,spentPoints:0,claimedRewards:[]}, 
+        {id:10,name:'WonderFood JIJEL',phone:'0550000010',address:'جيجل',email:'wonderfood@mail.com',code:'1010',barcode:'CYC-WFJ10',totalKg:8.09,points:0,spentPoints:0,claimedRewards:[]} 
+    ], 
+    collections:[ 
+        {id:1,restId:1,qty:2.44,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:24.4}, 
+        {id:2,restId:2,qty:5.70,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:57}, 
+        {id:3,restId:3,qty:6.84,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:68.4}, 
+        {id:4,restId:4,qty:4.23,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:42.3}, 
+        {id:5,restId:5,qty:9.47,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:94.7}, 
+        {id:6,restId:6,qty:11.24,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:112.4}, 
+        {id:7,restId:7,qty:11.70,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:117}, 
+        {id:8,restId:8,qty:10.00,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:100}, 
+        {id:9,restId:9,qty:10.64,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:106.4}, 
+        {id:10,restId:10,qty:8.09,type:'mixed',notes:'تسجيل أولي (يومي)',date:'2024-05-01T10:00:00Z',pointsEarned:80.9}
+    ], 
+    nextCollectionId:11, 
+    nextRestId:11 
+};
 
 let restaurants=[],collections=[],nextCollectionId=1,nextRestId=6;
 let isRegistering=false,currentRestId=null;
@@ -259,7 +287,7 @@ function loadData(){
             if(!r.email) r.email = r.name.toLowerCase().replace(/\s/g,'')+'@mail.com'; 
             if(!r.code) r.code = '1234'; 
             if(!r.claimedRewards) r.claimedRewards=[]; 
-            if(!r.barcode) r.barcode = generateBarcode(); // إضافة باركود للمطاعم القديمة
+            if(!r.barcode) r.barcode = generateBarcode(); 
         });
         recalcAllPoints();
         saveData();
@@ -413,7 +441,7 @@ function renderAdminDashboard() {
     const totalPoints = restaurants.reduce((s,r) => s + r.points, 0);
     document.getElementById('adminStats').innerHTML = `
         <div class="stat-card green"><div class="stat-icon green"><i class="fas fa-store"></i></div><div class="stat-value">${restaurants.length}</div><div class="stat-label">المطاعم المسجلة</div></div>
-        <div class="stat-card gold"><div class="stat-icon gold"><i class="fas fa-weight-hanging"></i></div><div class="stat-value">${totalKg} كجم</div><div class="stat-label">إجمالي البلاستيك</div></div>
+        <div class="stat-card gold"><div class="stat-icon gold"><i class="fas fa-weight-hanging"></i></div><div class="stat-value">${totalKg.toFixed(2)} كجم</div><div class="stat-label">إجمالي البلاستيك</div></div>
         <div class="stat-card silver"><div class="stat-icon silver"><i class="fas fa-coins"></i></div><div class="stat-value">${totalPoints}</div><div class="stat-label">إجمالي النقاط</div></div>
         <div class="stat-card bronze"><div class="stat-icon bronze"><i class="fas fa-list-check"></i></div><div class="stat-value">${collections.length}</div><div class="stat-label">عمليات الجمع</div></div>
     `;
@@ -437,7 +465,7 @@ function renderRestaurantsTable() {
         const pkg = getRestPackage(r.totalKg);
         return `<tr>
             <td>${i+1}</td><td>${r.name}</td><td style="font-family:monospace;letter-spacing:1px;color:var(--accent)">${r.barcode}</td><td>${r.phone}</td>
-            <td>${r.totalKg} كجم</td><td>${r.points}</td>
+            <td>${r.totalKg.toFixed(2)} كجم</td><td>${r.points}</td>
             <td><span class="badge ${pkg.badgeClass}"><i class="fas fa-${pkg.icon}"></i> ${pkg.name}</span></td>
             <td><button class="btn btn-sm btn-danger" onclick="deleteRestaurant(${r.id})"><i class="fas fa-trash"></i></button></td>
         </tr>`;
@@ -455,21 +483,29 @@ function adminSubmitCollection() {
     const restId = parseInt(document.getElementById('adminCollRest').value);
     const qty = parseFloat(document.getElementById('adminCollQty').value);
     const type = document.getElementById('adminCollType').value;
-    const notes = ""; // Can be added back if needed
 
-    if(!restId || !qty || qty <= 0) return showToast('يرجى إدخال بيانات صحيحة', 'warning');
-    const rest = restaurants.find(r => r.id === restId);
-    if(!rest) return;
+    if(!restId || isNaN(qty) || qty <= 0) return showToast('يرجى اختيار المطعم وإدخال كمية صحيحة', 'warning');
 
-    const pointsEarned = qty * 10; // القاعدة الثابتة: 10 نقاط لكل 1 كجم
+    const pointsEarned = Math.round(qty * 10);
+    const newCollection = {
+        id: nextCollectionId++,
+        restId,
+        qty,
+        type,
+        notes: 'إدخال يدوي من المدير',
+        date: new Date().toISOString(),
+        pointsEarned
+    };
 
-    collections.push({ id: nextCollectionId++, restId, qty, type, notes, date: new Date().toISOString(), pointsEarned });
-    recalcAllPoints(); saveData();
+    collections.push(newCollection);
+    recalcAllPoints();
+    saveData();
     
     document.getElementById('adminCollQty').value = '';
     document.getElementById('adminBarcodeInput').value = '';
-    renderAdminDashboard(); renderAllCollections();
-    showToast(`تم إضافة ${qty} كجم لـ ${rest.name} واحتساب ${pointsEarned} نقطة`, 'success');
+    
+    renderAllCollections();
+    showToast('تم تسجيل الجمع بنجاح!', 'success');
 }
 
 function renderAllCollections() {
@@ -477,43 +513,89 @@ function renderAllCollections() {
     const sorted = [...collections].sort((a,b) => new Date(b.date) - new Date(a.date));
     list.innerHTML = sorted.map(c => {
         const r = restaurants.find(rest => rest.id === c.restId);
-        return `<div class="collection-item"><div class="collection-item-right"><div class="collection-item-icon"><i class="fas fa-recycle"></i></div><div><div style="font-weight:700">${r ? r.name : 'غير معروف'}</div><div class="collection-item-date">${new Date(c.date).toLocaleString('ar-DZ')}</div></div></div><div style="text-align:left"><div class="collection-item-qty">${c.qty} كجم</div><div class="collection-item-pts">+${c.pointsEarned} نقطة</div></div></div>`;
+        return `<div class="collection-item">
+            <div class="collection-item-right">
+                <div class="collection-item-icon"><i class="fas fa-recycle"></i></div>
+                <div><div style="font-weight:700">${r ? r.name : 'غير معروف'}</div><div class="collection-item-date">${new Date(c.date).toLocaleString('ar-DZ')}</div></div>
+            </div>
+            <div style="text-align:left">
+                <div class="collection-item-qty">${c.qty} كجم</div>
+                <div class="collection-item-pts">+${c.pointsEarned} نقطة</div>
+            </div>
+        </div>`;
     }).join('');
 }
 
 function renderLeaderboard(containerId) {
-    const list = document.getElementById(containerId);
-    const sorted = [...restaurants].sort((a,b) => b.points - a.points);
-    list.innerHTML = sorted.map((r, i) => {
+    const sorted = [...restaurants].sort((a,b) => b.totalKg - a.totalKg);
+    const container = document.getElementById(containerId);
+    container.innerHTML = sorted.map((r, i) => {
         const pkg = getRestPackage(r.totalKg);
         const rankClass = i === 0 ? 'r1' : i === 1 ? 'r2' : i === 2 ? 'r3' : 'rn';
-        return `<div class="leaderboard-item"><div class="leaderboard-rank ${rankClass}">${i+1}</div><div class="leaderboard-info"><div class="leaderboard-name">${r.name}</div><div class="leaderboard-pkg"><i class="fas fa-${pkg.icon}"></i> باقة ${pkg.name}</div></div><div style="text-align:center"><div class="leaderboard-pts">${r.points}</div><div class="leaderboard-pts-label">نقطة</div></div></div>`;
+        return `<div class="leaderboard-item">
+            <div class="leaderboard-rank ${rankClass}">${i+1}</div>
+            <div class="leaderboard-info">
+                <div class="leaderboard-name">${r.name}</div>
+                <div class="leaderboard-pkg"><span class="badge ${pkg.badgeClass}"><i class="fas fa-${pkg.icon}"></i> ${pkg.name}</span></div>
+            </div>
+            <div style="text-align:center">
+                <div class="leaderboard-pts">${r.totalKg.toFixed(2)}</div>
+                <div class="leaderboard-pts-label">كيلوغرام</div>
+            </div>
+        </div>`;
     }).join('');
 }
 
 function renderPackages() {
     const grid = document.getElementById('packagesGrid');
-    grid.innerHTML = Object.values(PACKAGES).map(pkg => {
-        const count = restaurants.filter(r => getRestPackage(r.totalKg).name === pkg.name).length;
-        return `<div class="package-card ${pkg.cssClass}-pkg"><div class="package-badge">${pkg.name}</div><div class="package-icon"><i class="fas fa-${pkg.icon}"></i></div><div class="package-name">${pkg.name}</div><div class="package-range">${pkg.minKg} - ${pkg.maxKg === Infinity ? '∞' : pkg.maxKg} كجم</div><div class="package-points">10 نقاط / كجم</div><div class="package-count">المطاعم في هذه الباقة: <strong>${count}</strong></div></div>`;
+    const pkgData = [
+        {key: 'bronze', count: restaurants.filter(r => r.totalKg < PACKAGES.silver.minKg).length},
+        {key: 'silver', count: restaurants.filter(r => r.totalKg >= PACKAGES.silver.minKg && r.totalKg < PACKAGES.gold.minKg).length},
+        {key: 'gold', count: restaurants.filter(r => r.totalKg >= PACKAGES.gold.minKg).length}
+    ];
+    grid.innerHTML = pkgData.map(p => {
+        const pkg = PACKAGES[p.key];
+        return `<div class="package-card ${pkg.cssClass}-pkg">
+            <div class="package-badge">${pkg.name}</div>
+            <div class="package-icon"><i class="fas fa-${pkg.icon}"></i></div>
+            <div class="package-name">الباقة ${pkg.name}</div>
+            <div class="package-range">${pkg.minKg} - ${pkg.maxKg === Infinity ? '∞' : pkg.maxKg} كجم</div>
+            <div class="package-points">10 نقاط لكل كجم</div>
+            <div class="package-count">المطاعم في هذه الباقة: <strong>${p.count}</strong></div>
+        </div>`;
     }).join('');
 }
 
 function renderRewards(containerId, isAdmin) {
-    const grid = document.getElementById(containerId);
+    const container = document.getElementById(containerId);
     const rest = restaurants.find(r => r.id === currentRestId);
-    grid.innerHTML = REWARDS.map(rew => {
-        const isLocked = rest ? rest.points < rew.pts : true;
-        return `<div class="reward-card ${isLocked ? 'locked' : ''}"><div class="reward-icon"><i class="fas fa-${rew.icon}"></i></div><div class="reward-name">${rew.name}</div><div class="reward-pts">${rew.pts} نقطة</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${rew.desc}</div>${!isAdmin && !isLocked ? `<button class="btn btn-sm btn-accent reward-btn" onclick="claimReward(${rew.id})">استلام</button>` : ''}</div>`;
+    const availablePts = rest ? rest.points - rest.spentPoints : 0;
+
+    container.innerHTML = REWARDS.map(rw => {
+        const isLocked = !isAdmin && availablePts < rw.pts;
+        const isClaimed = rest && rest.claimedRewards.includes(rw.id);
+        return `<div class="reward-card ${isLocked && !isClaimed ? 'locked' : ''}">
+            <div class="reward-icon"><i class="fas fa-${rw.icon}"></i></div>
+            <div class="reward-name">${rw.name}</div>
+            <div class="reward-pts">${rw.pts} نقطة</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px;">${rw.desc}</div>
+            ${isAdmin ? '' : `<div class="reward-btn">${isClaimed ? '<button class="btn btn-sm btn-outline" disabled>تم الاستلام</button>' : (isLocked ? '' : `<button class="btn btn-sm btn-accent" onclick="claimReward(${rw.id})">استلام</button>`)}</div>`}
+        </div>`;
     }).join('');
 }
 
-function claimReward(id) {
+function claimReward(rwId) {
     const rest = restaurants.find(r => r.id === currentRestId);
-    const rew = REWARDS.find(r => r.id === id);
-    if(!rest || !rew || rest.points < rew.pts) return;
-    rest.spentPoints += rew.pts; rest.claimedRewards.push(id);
-    saveData(); renderRestDashboard(rest); showRestPage('myRewards', document.querySelector('.sidebar-item[onclick*="myRewards"]')); showToast(`تم استلام المكافأة: ${rew.name}`, 'success');
+    const rw = REWARDS.find(r => r.id === rwId);
+    if(!rest || !rw) return;
+    const availablePts = rest.points - rest.spentPoints;
+    if(availablePts < rw.pts) return showToast('نقاطك غير كافية', 'error');
+    
+    rest.spentPoints += rw.pts;
+    rest.claimedRewards.push(rwId);
+    saveData();
+    renderRewards('myRewardsGrid', false);
+    showToast(`تم استلام المكافأة: ${rw.name}`, 'success');
 }
 
 function renderRestDashboard(rest) {
@@ -521,63 +603,128 @@ function renderRestDashboard(rest) {
     const pkg = getRestPackage(rest.totalKg);
     document.getElementById('restTopbarPkg').innerHTML = `<span class="pulse-dot"></span> باقة ${pkg.name}`;
     document.getElementById('restWelcomeName').innerText = `مرحباً بك، ${rest.name}`;
+    
+    const availablePts = rest.points - rest.spentPoints;
     document.getElementById('restStats').innerHTML = `
-        <div class="stat-card green"><div class="stat-icon green"><i class="fas fa-weight-hanging"></i></div><div class="stat-value">${rest.totalKg} كجم</div><div class="stat-label">إجمالي الكمية</div></div>
-        <div class="stat-card gold"><div class="stat-icon gold"><i class="fas fa-coins"></i></div><div class="stat-value">${rest.points - rest.spentPoints}</div><div class="stat-label">رصيد نقاطك</div></div>
+        <div class="stat-card green"><div class="stat-icon green"><i class="fas fa-weight-hanging"></i></div><div class="stat-value">${rest.totalKg.toFixed(2)} كجم</div><div class="stat-label">إجمالي البلاستيك</div></div>
+        <div class="stat-card gold"><div class="stat-icon gold"><i class="fas fa-coins"></i></div><div class="stat-value">${availablePts}</div><div class="stat-label">نقاطك المتاحة</div></div>
         <div class="stat-card silver"><div class="stat-icon silver"><i class="fas fa-${pkg.icon}"></i></div><div class="stat-value">${pkg.name}</div><div class="stat-label">باقتك الحالية</div></div>
     `;
 }
 
 function renderMyHistory() {
     const list = document.getElementById('myHistoryList');
-    const myColl = collections.filter(c => c.restId === currentRestId).sort((a,b) => new Date(b.date) - new Date(a.date));
-    list.innerHTML = myColl.map(c => `<div class="collection-item"><div class="collection-item-right"><div class="collection-item-icon"><i class="fas fa-recycle"></i></div><div><div style="font-weight:700">${c.type === 'water' ? 'مياه' : c.type === 'soft' ? 'غازية' : 'خليط'}</div><div class="collection-item-date">${new Date(c.date).toLocaleString('ar-DZ')}</div></div></div><div style="text-align:left"><div class="collection-item-qty">${c.qty} كجم</div><div class="collection-item-pts">+${c.pointsEarned} نقطة</div></div></div>`).join('');
+    const myColls = collections.filter(c => c.restId === currentRestId).sort((a,b) => new Date(b.date) - new Date(a.date));
+    list.innerHTML = myColls.length ? myColls.map(c => `<div class="collection-item">
+        <div class="collection-item-right">
+            <div class="collection-item-icon"><i class="fas fa-recycle"></i></div>
+            <div><div style="font-weight:700">عملية جمع</div><div class="collection-item-date">${new Date(c.date).toLocaleString('ar-DZ')}</div></div>
+        </div>
+        <div style="text-align:left">
+            <div class="collection-item-qty">${c.qty} كجم</div>
+            <div class="collection-item-pts">+${c.pointsEarned} نقطة</div>
+        </div>
+    </div>`).join('') : '<p style="color:var(--muted)">لا توجد سجلات بعد</p>';
 }
 
 function renderMyQR() {
     const rest = restaurants.find(r => r.id === currentRestId);
     if(!rest) return;
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${rest.barcode}`;
     document.getElementById('myQRDetails').innerHTML = `
         <div class="qr-container">
-            <h3 style="margin-bottom:10px; color:var(--fg);">رمز التعريف الخاص بمطعمكم</h3>
-            <p style="color:var(--muted); margin-bottom:20px; font-size:14px;">يتم مسح هذا الرمز من قبل إدارة المستودع لتسجيل الكمية فوراً</p>
-            <img src="${qrUrl}" alt="QR Code">
-            <div style="background:var(--bg); padding:15px; border-radius:8px; display:inline-block; margin-top:10px;">
-                <div style="font-size:24px; font-weight:900; color:var(--accent); letter-spacing:3px; font-family:monospace;">${rest.barcode}</div>
-            </div>
-            <p style="color:var(--muted); font-size:12px; margin-top:15px;">احتفظ بهذا الرمز سرياً لتجنب تسجيل كميات لحساب غيركم</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${rest.barcode}" alt="QR Code">
+            <h2 style="margin-bottom:10px; font-family:monospace; color:var(--accent); letter-spacing:2px;">${rest.barcode}</h2>
+            <p style="color:var(--muted)">قدم هذا الرمز للمستودع لتسجيل كميتك</p>
         </div>
     `;
 }
 
 function renderMyPackage() {
-    const container = document.getElementById('myPackageDetails');
     const rest = restaurants.find(r => r.id === currentRestId);
     if(!rest) return;
     const pkg = getRestPackage(rest.totalKg);
     const nextPkg = pkg === PACKAGES.bronze ? PACKAGES.silver : PACKAGES.gold;
     const progress = pkg === PACKAGES.gold ? 100 : ((rest.totalKg - pkg.minKg) / (nextPkg.minKg - pkg.minKg)) * 100;
-    container.innerHTML = `
-        <div class="package-card ${pkg.cssClass}-pkg" style="max-width:400px;margin:0 auto;">
-            <div class="package-badge">${pkg.name}</div><div class="package-icon"><i class="fas fa-${pkg.icon}"></i></div><div class="package-name">${pkg.name}</div><div class="package-points">10 نقاط / كجم</div>
-            ${pkg !== PACKAGES.gold ? `<div style="margin-top:12px"><div style="display:flex;justify-content:space-between;font-size:12px;color:var(--fg2)"><span>${pkg.minKg} كجم</span><span>${nextPkg.minKg} كجم</span></div><div class="progress-bar-container"><div class="progress-bar ${pkg.barClass}" style="width:${Math.min(progress, 100)}%"></div></div></div>` : '<div style="margin-top:12px;color:var(--gold)">لقد وصلت للباقة القصوى! 🎉</div>'}
+
+    document.getElementById('myPackageDetails').innerHTML = `
+        <div class="package-card ${pkg.cssClass}-pkg" style="max-width:400px; margin:0 auto;">
+            <div class="package-badge">${pkg.name}</div>
+            <div class="package-icon"><i class="fas fa-${pkg.icon}"></i></div>
+            <div class="package-name">الباقة ${pkg.name}</div>
+            <div class="package-range">اجمع ${nextPkg.minKg - rest.totalKg > 0 ? (nextPkg.minKg - rest.totalKg).toFixed(2) : 0} كجم إضافية للانتقال للباقة ${nextPkg.name}</div>
+            <div class="progress-bar-container"><div class="progress-bar ${pkg.barClass}" style="width:${Math.min(progress, 100)}%"></div></div>
+            <div class="package-count">المجموع حتى الآن: <strong>${rest.totalKg.toFixed(2)} كجم</strong></div>
         </div>
     `;
 }
 
 function renderStorageInfo() {
-    const size = new Blob([localStorage.getItem(STORAGE_KEY)]).size;
-    const kb = (size / 1024).toFixed(2);
-    document.getElementById('storageInfo').innerHTML = `المساحة المستخدمة: <strong>${kb} KB</strong><br>عدد المطاعم: <strong>${restaurants.length}</strong><br>عدد العمليات: <strong>${collections.length}</strong>`;
+    const size = new Blob([JSON.stringify({restaurants, collections})]).size;
+    document.getElementById('storageInfo').innerHTML = `
+        <div>المطاعم: <strong>${restaurants.length}</strong></div>
+        <div>العمليات: <strong>${collections.length}</strong></div>
+        <div>حجم التخزين: <strong>${(size / 1024).toFixed(2)} KB</strong></div>
+    `;
 }
 
-function exportData() { const d=JSON.stringify({restaurants,collections,nextCollectionId,nextRestId},null,2); const b=new Blob([d],{type:"application/json"}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download='cyclead_backup.json'; a.click(); URL.revokeObjectURL(u); showToast('تم تصدير البيانات بنجاح', 'success'); }
-function importData(event) { const f=event.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=function(e){ try{ const d=JSON.parse(e.target.result); if(d.restaurants&&d.collections){ restaurants=d.restaurants; collections=d.collections; nextCollectionId=d.nextCollectionId||1; nextRestId=d.nextRestId||1; saveData(); recalcAllPoints(); renderAdminDashboard(); showToast('تم استيراد البيانات بنجاح', 'success'); } else { showToast('ملف غير صالح', 'error'); } } catch(err){ showToast('خطأ في قراءة الملف', 'error'); } }; r.readAsText(f); }
-function resetAllData() { if(confirm('هل أنت متأكد من مسح جميع البيانات؟')){ localStorage.removeItem(STORAGE_KEY); loadData(); renderAdminDashboard(); showToast('تم مسح البيانات', 'success'); } }
+function exportData() {
+    const dataStr = JSON.stringify({restaurants, collections, nextCollectionId, nextRestId}, null, 2);
+    const blob = new Blob([dataStr], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'cyclead_backup.json'; a.click();
+    URL.revokeObjectURL(url);
+    showToast('تم تصدير البيانات بنجاح', 'success');
+}
 
-function showToast(msg, type = 'success') { const c=document.getElementById('toastContainer'); const t=document.createElement('div'); t.className=`toast ${type}`; const i={success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle'}; t.innerHTML=`<i class="fas ${i[type]||i.success}"></i> ${msg}`; c.appendChild(t); setTimeout(()=>{t.style.animation='toastOut 0.4s ease forwards';setTimeout(()=>t.remove(),400);},3000); }
+function importData(event) {
+    const file = event.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            if(data.restaurants && data.collections) {
+                restaurants = data.restaurants;
+                collections = data.collections;
+                nextCollectionId = data.nextCollectionId || 1;
+                nextRestId = data.nextRestId || 1;
+                recalcAllPoints();
+                saveData();
+                renderAdminDashboard();
+                showToast('تم استيراد البيانات بنجاح', 'success');
+            } else {
+                showToast('ملف غير صالح', 'error');
+            }
+        } catch(err) {
+            showToast('خطأ في قراءة الملف', 'error');
+        }
+    };
+    reader.readAsText(file);
+}
 
+function resetAllData() {
+    if(!confirm('هل أنت متأكد من مسح جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    loadData();
+    renderAdminDashboard();
+    showToast('تم مسح البيانات وإعادة التعيين', 'success');
+}
+
+function showToast(msg, type) {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const iconMap = {success: 'fa-check-circle', error: 'fa-times-circle', warning: 'fa-exclamation-triangle'};
+    toast.innerHTML = `<i class="fas ${iconMap[type] || 'fa-info-circle'}"></i> ${msg}`;
+    container.appendChild(toast);
+    setTimeout(() => {
+        toast.style.animation = 'toastOut 0.4s ease forwards';
+        setTimeout(() => toast.remove(), 400);
+    }, 3000);
+}
+
+// تهيئة التطبيق عند التحميل
 loadData();
 </script>
 </body>
